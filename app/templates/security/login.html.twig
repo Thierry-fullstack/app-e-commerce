@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connection{% endblock %}
+{% block importmap %}
+    {{ importmap(['app', 'login']) }}
+{% endblock %}
+
+{% block body %}
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    <div class="container mt-5 ">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-sm-12">
+                <div id="bg-login-form">
+                    <div class="card-body">
+                        <h4 class="mb-3 mt-1 text-center fw-bolder text-primary">Connexion</h4>
+                        <div class="d-grid gap-2 mb-3">
+                            <ul class="list-group">
+                                <li id="dialogLogin" class="list-group-item text-warning fw-bolder"></li>
+                            </ul>
+                        </div>
+                        <form method="post" id="loginForm" novalidate>
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control form-control-sm" name="email" id="inputEmail" required
+                                       autocomplete="email" autofocus >
+                                <label for="inputEmail" class="form-check-label" id="labelEmail">Email *</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" name="password" id="inputPassword" class="form-control form-control-sm" id="inputPassword" required
+                                       autocomplete="current-password" >
+                                <label for="inputPassword" class="form-check-label" id="labelPassword">Mot de passe *</label>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" name="_remember_me" class="form-check-input" id="inputRemember">
+                                <label class="form-check-label" for="rememberMe" id="labelRemember"><small class="mx-2">Se souvenir de moi</small></label>
+                            </div>
+                            <div class="d-grid">
+                                <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+                                <button type="submit" class="btn btn-outline-secondary text-capitalize" id="submitConnect">Soumettre</button>
+                            </div>
+                        </form>
+
+                        <div class="text-center mt-4">
+                            <hr class="text-warning border-3">
+                            <a href="{{ path('app_forgot_password') }}" class="text-primary fw-semibold fst-italic text-decoration-none "
+                               data-bs-toggle="tooltip" data-bs-placement="top" title="Mot de passe oublié">Mot de passe oublié ?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

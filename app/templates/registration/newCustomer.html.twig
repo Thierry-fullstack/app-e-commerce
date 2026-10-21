@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création compte client{% endblock %}
+{% block importmap %}
+    {{ importmap(['app', 'customer']) }}
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <main>
+            <div class="py-lg-4 py-sm-0 mt-sm-2 text-center">
+                <h4 class="text-primary" >{{ app.user.email }}</h4>
+            </div>
+            <div class="row g-3">
+                <div class="offset-1 col-md-2">
+                    <div class="mb-md-5 mb-sm-0">&nbsp;</div>
+                    <ul class="list-group ">
+                        <li class="contact-item  d-flex justify-content-between lh-sm">
+                            <small id="infoLastName" class="mt-0">Nom</small>
+                        </li>
+                        <li class="contact-item  d-flex justify-content-between lh-sm">
+                            <small id="infoFirstName" class="mt-0">Prénom</small>
+                        </li>
+                        <li class="contact-item  d-flex justify-content-between lh-sm">
+                            <small id="infoAddress" class="mt-0">Adresse</small>
+                        </li>
+                        <li class="contact-item  d-flex justify-content-between lh-sm">
+                            <small id="infoZipCode" class="mt-0">Code postal</small>
+                        </li>
+                        <li class="contact-item  d-flex justify-content-between lh-sm">
+                            <small id="infoCity" class="mt-0">Ville</small>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-7">
+                    <h6 class="mb-4 text-primary">Vos coordonnées &nbsp;<span id="dialogInscription" class="text-warning h6 small">&nbsp;</span></h6>
+                    {{ form_start(form,{attr:{id:'inscription_client_form',novalidate:'novalidate'}}) }}
+                    <div class="form-floating mb-3">
+                        {{ form_widget(form.lastname) }}
+                        {{ form_label(form.lastname)}}
+                        <div class="text-danger small">
+                            {{ form_errors(form.lastname)}}
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{ form_widget(form.firstname) }}
+                        {{ form_label(form.firstname)}}
+                        <div class="text-danger small">
+                            {{ form_errors(form.firstname)}}
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{ form_widget(form.address) }}
+                        {{ form_label(form.address)}}
+                        <div class="text-danger small">
+                            {{ form_errors(form.address)}}
+                        </div>
+                    </div>
+                    <div class="row col-md-12 gy-3">
+                       <div class="form-floating col-md-4">
+                           {{ form_widget(form.zipcode) }}
+                           {{ form_label(form.zipcode)}}
+                           <div class="text-danger small">
+                               {{ form_errors(form.zipcode)}}
+                           </div>
+                       </div>
+                        <div class="form-floating col-md-8">
+                            {{ form_widget(form.city) }}
+                            {{ form_label(form.city)}}
+                            <div class="text-danger small">
+                                {{ form_errors(form.city)}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-grid mt-4">
+                        {{ form_row(form.submit,{ attr:{ class:'btn btn-outline-secondary text-capitalize w-100 ' } }) }}
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

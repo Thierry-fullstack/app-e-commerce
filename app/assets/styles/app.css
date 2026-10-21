@@ -1,0 +1,210 @@
+html body{
+    margin:auto;
+    background-color: #FFFFFF;
+}
+
+.contact-info {
+   /* background: linear-gradient(135deg, #0062cc, #0096ff); */
+    padding: 40px;
+    font-family: Georgia;
+}
+.contact-wrapper{
+    margin-top: 10px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: start;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    transform: translateX(10px);
+}
+
+.contact-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+}
+
+.social-links {
+    margin-top: 30px;
+}
+
+.social-icon {
+    width: 30px;
+    height: 30px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background: white;
+    color: #0062cc;
+    transform: translateY(-3px);
+}
+
+.form-control {
+    border-radius: 10px;
+    padding: 12px 15px;
+    border: 2px solid #eee;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #0062cc;
+    box-shadow: none;
+}
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, #0062cc, #0096ff);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,98,204,0.3);
+}
+
+#message-login{
+    font-size: 12px;
+}
+.password-info{
+    font-size: 11px;
+}
+/*------------password register------------------*/
+
+.contact-item {
+    display: flex;
+    align-items: start;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+#password_criteria{
+    display: none;
+    margin-left: 0;
+    padding-left: 0;
+    height: 100px;
+}
+
+#password_criteria li {
+    font-size: 12px;
+    list-style: none;
+}
+
+#password_criteria {
+    text-shadow: 0 0 0 lightgreen;
+    content: '\02714';
+}
+
+#password_criteria li[class="password-criteria-true"]::before,
+#password_criteria li[class="password-criteria-false"]::before
+{
+    margin-right: 0.5rem;
+    color: transparent;
+}
+
+#password_criteria li[class="password-criteria-true"]::before
+{
+    text-shadow: 0 0 0 lightgreen;
+    content: '\02714';
+}
+
+#password_criteria li[class="password-criteria-false"]::before
+{
+    text-shadow: 0 0 0 red;
+    content: '\02716';
+}
+#label-check-agreeTerms{
+    font-size: 12px;
+}
+#password-info{
+    height: 16px;
+}
+
+#password_criteria{
+    display: none;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+#confirm_criteria{
+    display: none;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+#password_criteria li {
+    font-size: 13px;
+}
+#confirm_criteria li {
+    font-size: 13px;
+}
+
+#password_criteria {
+    text-shadow: 0 0 0 lightgreen;
+    content: '\02714';
+}
+#confirm_criteria {
+    text-shadow: 0 0 0 lightgreen;
+    content: '\02714';
+}
+
+#password_criteria li[class="password-criteria-true"]::before,
+#password_criteria li[class="password-criteria-false"]::before
+{
+    margin-right: 0.5rem;
+    color: transparent;
+}
+
+#confirm_criteria li[class="password-criteria-true"]::before,
+#confirm_criteria li[class="password-criteria-false"]::before
+{
+    margin-right: 0.5rem;
+    color: transparent;
+}
+
+#password_criteria li[class="password-criteria-true"]::before
+{
+    text-shadow: 0 0 0 lightgreen;
+    content: '\02714';
+}
+#confirm_criteria li[class="password-criteria-true"]::before
+{
+    text-shadow: 0 0 0 lightgreen;
+    content: '\02714';
+}
+
+#password_criteria li[class="password-criteria-false"]::before
+{
+    text-shadow: 0 0 0 red;
+    content: '\02716';
+}
+#confirm_criteria li[class="password-criteria-false"]::before
+{
+    text-shadow: 0 0 0 red;
+    content: '\02716';
+}
+
+

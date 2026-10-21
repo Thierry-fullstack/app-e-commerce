@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+{% block importmap %}
+    {{ importmap(['app', 'register']) }}
+{% endblock %}
+{% block body %}
+
+    <div class="container my-2">
+        <div class="row justify-content-center mt-2">
+            <div class="col-md-10 col-sm-12">
+                <div class="contact-wrapper">
+                    <div class="row g-0">
+                        <div class="col-md-3">
+                            <div class="contact-info h-100">
+                                <p class="text-center text-info-emphasis fw-bolder" id="message-login">&nbsp;</p>
+                                <ul class="list-group">
+                                <li class="contact-item list-group-horizontal">
+                                        <small id="email-info" class="mb-0 mt-1">Email</small>
+                                </li>
+                                <li class="contact-item list-group-horizontal">
+                                        <small id="password-info">Mot de passe</small>
+                                        <div class="h-100 password-info" >
+                                            <ul id='password_criteria' class="text-info-emphasis mt-4 list-group">
+                                                <li id="password_length_criteria" data-password-criteria class="password-criteria-true">10 caractères au total</li>
+                                                <li id="password_special_character_criteria" data-password-criteria>Caractère spécial</li>
+                                                <li id="password_uppercase_criteria" data-password-criteria>Majuscule</li>
+                                                <li id="password_number_criteria" data-password-criteria>Chiffre</li>
+                                                <li id="password_lowercase_criteria" data-password-criteria>Minuscule</li>
+                                            </ul>
+                                        </div>
+                                </li>
+                                <li class="contact-item list-group-horizontal">
+                                        <small id="agree-info">Contrat</small>
+                                </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-md-7">
+                            <div class="mx-1">
+                                <h4 class="mb-3 mt-1 text-center fw-bolder text-primary">Inscription</h4>
+                                {{ form_start(registrationForm,{attr:{id:'registration_form',novalidate:'novalidate'}}) }}
+                                <div class="form-floating mb-3">
+                                    {{ form_widget(registrationForm.email) }}
+                                    {{ form_label(registrationForm.email)}}
+                                    <div class="text-danger small">
+                                        {{ form_errors(registrationForm.email)}}
+                                    </div>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    {{ form_widget(registrationForm.plainPassword) }}
+                                    {{ form_label(registrationForm.plainPassword)}}
+                                    <div class="text-danger small">
+                                        {{ form_errors(registrationForm.plainPassword)}}
+                                    </div>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    {{ form_widget(registrationForm.agreeTerms) }}
+                                    {{ form_label(registrationForm.agreeTerms)}}
+                                    <div class="text-danger small">
+                                        {{ form_errors(registrationForm.agreeTerms)}}
+                                        <small id="errorAgreeTerms"></small>
+                                    </div>
+                                </div>
+                                <div class="d-grid">
+                                    {{ form_row(registrationForm.register,{ attr:{ class:'btn btn-outline-secondary text-capitalize col-12 mx-auto' } }) }}
+                                </div>
+                                {{ form_end(registrationForm) }}
+                                <hr class="text-warning border-3" />
+                                <div class="text-center">
+                                    <a href="{{ path('app_login') }}" class="text-warning fst-italic text-decoration-none "
+                                       data-bs-toggle="tooltip" data-bs-placement="top" title="Déjà inscrit ?">Déjà inscrit ?</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
