@@ -47,7 +47,7 @@ class Customer
     #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'customer', orphanRemoval: true)]
     private Collection $orders;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 20)]
     private ?string $phone = null;
 
     public function __construct()

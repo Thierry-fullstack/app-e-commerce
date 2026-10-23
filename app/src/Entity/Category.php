@@ -35,6 +35,18 @@ class Category
     #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'categorie')]
     private Collection $products;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $slug = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $url = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $alt = null;
+
+    #[ORM\Column]
+    private ?int $type = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -129,8 +141,56 @@ class Category
 
         return $this;
     }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(?string $url): static
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    public function getAlt(): ?string
+    {
+        return $this->alt;
+    }
+
+    public function setAlt(?string $alt): static
+    {
+        $this->alt = $alt;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): void
+    {
+        $this->slug = $slug;
+    }
     public function __toString(): string
     {
         return $this->name;
     }
+
+    public function getType(): ?int
+    {
+        return $this->type;
+    }
+
+    public function setType(int $type): static
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+
 }

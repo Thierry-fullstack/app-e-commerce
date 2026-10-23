@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\User;
+use App\Repository\CategoryRepository;
 use App\Service\IntraController;
 use App\Service\JwtService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,12 +21,13 @@ final class MainController extends AbstractController
      * @param JwtService $jwtService
      * @param MessageBusInterface $messageBus
      * @param Session $session
+     * @param CategoryRepository $categoryRepository
      * @return Response
      * @throws ExceptionInterface
      */
     #[Route('/', name: 'app_main')]
     public function index(IntraController $intraController,JwtService $jwtService,MessageBusInterface $messageBus,
-    Session $session): Response
+    Session $session, CategoryRepository $categoryRepository): Response
     {
         if($this->getUser()){
             $user = $this->getUser();
@@ -43,6 +45,7 @@ final class MainController extends AbstractController
                 }
             }
         }
-        return $this->render('main/index.html.twig');
+        return $this->render('main/index.html.twig',
+        [ 'categories' => $categoryRepository->findBy([],['type'=>'asc'])]);
     }
 }
