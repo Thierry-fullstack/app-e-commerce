@@ -3,5 +3,21 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-<h1>Portail</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+        <h2 class="text-info-emphasis text-center mt-5">Bienvenue dans notre boutique</h2>
+        </div>
+        {% for category in categories %}
+            {% if category.parent ===null %}
+            <h4 class="my-2 fst-italic">{{ category.name }}</h4>
+            {% else %}
+        <div class="col-lg-3 px-5">
+            {% include '_components/_card_category.html.twig' %}
+        </div>
+          {% endif %}
+        {%  endfor %}
+        </div>
+
+</div>
 {% endblock %}
