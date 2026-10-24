@@ -9,9 +9,9 @@
         <h2 class="text-info-emphasis text-center mt-5">Bienvenue dans notre boutique</h2>
         </div>
         {% for category in categories %}
-            {% if category.parent ===null %}
+            {% if category.parent === null %}
             <h4 class="my-2 fst-italic">{{ category.name }}</h4>
-            {% else %}
+            {% elseif category.subType !==null  %}
         <div class="col-lg-3 px-5">
             {% include '_components/_card_category.html.twig' %}
         </div>
