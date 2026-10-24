@@ -47,6 +47,9 @@ class Category
     #[ORM\Column]
     private ?int $type = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $subType = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -188,6 +191,18 @@ class Category
     public function setType(int $type): static
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getSubType(): ?int
+    {
+        return $this->subType;
+    }
+
+    public function setSubType(?int $subType): static
+    {
+        $this->subType = $subType;
 
         return $this;
     }
