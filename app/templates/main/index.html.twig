@@ -13,7 +13,7 @@
             <h4 class="my-2 fst-italic">{{ category.name }}</h4>
             {% elseif category.subType !==null  %}
         <div class="col-lg-3 px-5">
-            {% include '_components/_card_category.html.twig' %}
+            {% include '_components/_card_category.html.twig' with { category:category} %}
         </div>
           {% endif %}
         {%  endfor %}

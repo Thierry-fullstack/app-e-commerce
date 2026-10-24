@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégorie : {{ subCategorie.name }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 my-5">
+                <h2 class="text-info-emphasis text-center mt-5">Produits disponibles dans la catégorie {{ subCategorie.name }}</h2>
+            </div>
+
+            {% for category in categories %}
+
+                    <div class="col-lg-3 px-5">
+                        {% include '_components/_card_sub_category.html.twig' with { category:category} %}
+                    </div>
+            {%  endfor %}
+        </div>
+
+    </div>
+{% endblock %}

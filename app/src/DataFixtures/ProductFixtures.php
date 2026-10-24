@@ -24,8 +24,9 @@ class ProductFixtures extends Fixture
 
         $array_informatique = ['Ordinateur portable', 'Ordinateur de bureau', 'Pièces détachées', 'Périphériques'];
         $array_ordinateur_portable = ['PC portable','MacBook','PC reconditionné','MacBook reconditionné'];
-        $array_ordinateur_bureau = ['PC bureau','Ordianteur Mac','PC reconditionné','Mac reconditionné'];
-        $array_pieces_detachees = ['Ecran','clavier souris','imprimante','webcam'];
+        $array_ordinateur_bureau = ['PC bureau','Ordinateur Mac','PC reconditionné','Mac reconditionné'];
+        $array_pieces_détachées = ['carte mère','carte graphique','processeur','mémoire'];
+        $array_peripheriques = ['Ecran','clavier souris','imprimante','webcam'];
 
         $count = 1;
         foreach ($array_informatique as $name) {
@@ -61,8 +62,23 @@ class ProductFixtures extends Fixture
                     $manager->persist($typeProduit);
                 }
             }
+
             if($subCategory->getSubType() === 3){
-                foreach ($array_pieces_detachees as $genre)
+                foreach ($array_pieces_détachées as $genre)
+                {
+                    $typeProduit = new Category();
+                    $typeProduit->setName($genre);
+                    $typeProduit->setType(1);
+                    $typeProduit->setSubType(null);
+                    $typeProduit->setParent($subCategory);
+                    $typeProduit->setSlug(strtolower((str_replace(' ','-',$genre))));
+                    $typeProduit->setUrl(strtolower(str_replace(' ','-',$genre)). '.webp');
+                    $typeProduit->setAlt($genre);
+                    $manager->persist($typeProduit);
+                }
+            }
+            if($subCategory->getSubType() === 4){
+                foreach ($array_peripheriques as $genre)
                 {
                     $typeProduit = new Category();
                     $typeProduit->setName($genre);
@@ -167,7 +183,7 @@ class ProductFixtures extends Fixture
         $manager->persist($image);
         $array_image = ['Appareil photo', 'Caméra', 'Télévision'];
         $array_photo = ['photo numérique','photo reflex','photo hybride'];
-        $array_camera = ['caméscope','micro','cate mémoire'];
+        $array_camera = ['caméscope','micro','carte mémoire'];
         $array_television = ['television','antenne','adaptateur tnt'];
 
         $count = 1;

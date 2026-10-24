@@ -1,10 +1,10 @@
 
 {% if category is defined %}
-    <section class="my-2" style="width: 20rem;">
+    <section class="my-2" style="width: 18rem;">
         <h6 class="card-title text-info mb-2">{{ category.name }}</h6>
         <img src="{{ asset('assets/uploads/category/') ~ category.url }}" alt="{{ category.slug }}" class="img-fluid pe-4 h-50 w-50" alt="{{ category.slug }}">
         <div class="my-2">
-            <a href="#" class="btn btn-sm btn-secondary mx-3">Voir les articles</a>
+            <a href="{{ path('app_category_list_products',{slug:category.slug}) }}" class="btn btn-sm btn-secondary mx-3">Voir les produits</a>
         </div>
     </section>
 {% endif %}
