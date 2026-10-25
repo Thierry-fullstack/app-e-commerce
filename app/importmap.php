@@ -36,6 +36,10 @@ return [
         'path' => './assets/js/reset.js',
         'entrypoint' => true,
     ],
+    'show-product' => [
+        'path' => './assets/js/showProduct.js',
+        'entrypoint' => true,
+    ],
     '@hotwired/turbo' => [
         'version' => '8.0.23',
     ],

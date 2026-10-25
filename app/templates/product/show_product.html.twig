@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ produit.name }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Product Images -->
+            <div class="col-md-6 mb-4">
+                <img src="{{ asset('/assets/uploads/product/') ~ produit.images[0].name  }}" alt="Product" class="img-fluid h-40 w-50 rounded mb-3 product-image" id="mainImage">
+                <div class="d-flex justify-content-between">
+                    {% if produit.images is defined %}
+                        {% for image in produit.images %}
+                            {% if loop.first %}
+                    <img src=" {{ asset('/assets/uploads/product/') ~ image.name  }}" alt="{{ produit.name }}" class="thumbnail rounded active" onclick="changeImage(event, this.src)">
+                    {%  else %}
+                    <img src="{{ asset('/assets/uploads/product/') ~ image.name  }}" alt="{{ produit.name }}" class="thumbnail rounded" onclick="changeImage(event, this.src)">
+                            {%  endif %}
+                        {% endfor %}
+                    {%  endif %}
+                </div>
+            </div>
+
+            <!-- Product Details -->
+            <div class="col-md-6">
+                <h2 class="mb-3">{{ produit.name }}</h2>
+                <p class="text-muted mb-4">SKU: WH1000XM4</p>
+                <div class="mb-3">
+                    <span class="h4 me-2">{{ produit.price }}  &#8364;</span>
+                    <span class="text-muted"><s>{{ produit.price * 1.10 }}</s></span>
+                </div>
+                <div class="mb-3">
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-half text-warning"></i>
+                    <span class="ms-2">4.5 (120 reviews)</span>
+                </div>
+                <p class="mb-4">{{ produit.description }}</p>
+
+                <div class="mb-4">
+                    <label for="quantity" class="form-label">Quantity:</label>
+                    <input type="number" class="form-control" id="quantity" value="1" min="1" style="width: 80px;">
+                </div>
+                <button class="btn btn-primary btn-lg mb-3 me-2">
+                    <i class="bi bi-cart-plus"></i> Ajouter au panier
+                </button>
+                <button class="btn btn-outline-secondary btn-lg mb-3">
+                    <i class="bi bi-heart"></i> Liste des souhaits
+                </button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function changeImage(event, src) {
+            document.getElementById('mainImage').src = src;
+            document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
+{% endblock %}
+
+
+
+
+
+
+
+

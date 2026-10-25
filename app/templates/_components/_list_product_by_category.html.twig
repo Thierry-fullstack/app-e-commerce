@@ -2,7 +2,8 @@
     <div class="card-body">
         <div class="row cart-item mb-1">
             <div class="col-md-3">
-                <img src="{{ asset('/assets/uploads/product/mini/300x300-') ~ product.images[0].name  }}" alt="{{ product.name }}" class="img-fluid rounded">
+                {% set photo = random([product.images[0].name,product.images[1].name,product.images[2].name]) %}
+                <img src="{{ asset('/assets/uploads/product/mini/300x300-') ~ photo  }}" alt="{{ product.name }}" class="img-fluid rounded">
             </div>
             <div class="col-md-5">
                 <h5 class="card-title">{{ product.name }}</h5>
@@ -12,7 +13,7 @@
             <div class="col-md-3 text-end">
                 <p class="fw-bold text-primary">Prix : {{ product.price }} &#8364;</p>
                 <p class="fw-bolder small">stock disponible : {{ product.stock }}</p>
-                <a href="#" type="button" class="btn btn-sm btn-primary">Voir le produit</a>
+                <a href="{{ path('app_product_show_article',{slug:product.slug}) }}" type="button" class="btn btn-sm btn-primary">Voir le produit</a>
             </div>
         </div>
         <hr class="text-warning border-3">

@@ -61,8 +61,8 @@ class ProductFixtures extends Fixture
                     $produit->setName($mark );
                     $produit->setSlug(strtolower( $this->slugger->slug($produit->getName())));
                     $produit->setDescription('Intel Core i3-1220P 16 Go SSD 480 Go 16 LED Full HD+ Wi-Fi 6E Webcam Windows 11 Famille');
-                    $produit->setPrice($faker->randomNumber(5,true));
-                    $produit->setStock($faker->randomNumber(5,true));
+                    $produit->setPrice(mt_rand(1000,3000));
+                    $produit->setStock(mt_rand(10,20));
                     $produit->setCreatedAt(new \DateTimeImmutable());
                     $produit->setCategorie($typeProduit);
                     foreach ($array_netbooks as $netbook)
