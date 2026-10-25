@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+    {% if products is defined %}
+        {{ dump(products) }}
+    {% endif %}
+    {{ category }}
+{% endblock %}

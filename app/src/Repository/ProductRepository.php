@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -14,6 +15,16 @@ class ProductRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Product::class);
+    }
+
+    public function findProductsByCategory(Category $categorie):array
+    {
+        return $this->createQueryBuilder('product')
+            ->andWhere('product.categorie = :val')
+            ->setParameter('val', $categorie->getId())
+            ->orderBy('product.name','ASC')
+            ->getQuery()
+            ->getResult();
     }
 
     //    /**

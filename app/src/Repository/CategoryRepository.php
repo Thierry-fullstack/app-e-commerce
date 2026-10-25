@@ -21,7 +21,7 @@ class CategoryRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
             ->where('c.parent = :val')
             ->setParameter('val',$category->getId())
-            ->orderBy('c.name','DESC')
+            ->orderBy('c.id','ASC')
             ->getQuery()
             ->getResult();
     }

@@ -3,13 +3,20 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
+use App\Entity\Image;
+use App\Entity\Product;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProductFixtures extends Fixture
 {
+    public function  __construct(private readonly SluggerInterface $slugger){}
+
     public function load(ObjectManager $manager): void
     {
+        $faker = Factory::create('fr_FR');
 
         /* informatique */
         $informatique = new Category();
@@ -25,7 +32,7 @@ class ProductFixtures extends Fixture
         $array_informatique = ['Ordinateur portable', 'Ordinateur de bureau', 'Pièces détachées', 'Périphériques'];
         $array_ordinateur_portable = ['PC portable','MacBook','PC reconditionné','MacBook reconditionné'];
         $array_ordinateur_bureau = ['PC bureau','Ordinateur Mac','PC reconditionné','Mac reconditionné'];
-        $array_pieces_détachées = ['carte mère','carte graphique','processeur','mémoire'];
+        $array_pieces_detachees = ['carte mère','carte graphique','processeur','mémoire'];
         $array_peripheriques = ['Ecran','clavier souris','imprimante','webcam'];
 
         $count = 1;
@@ -42,10 +49,32 @@ class ProductFixtures extends Fixture
                 $typeProduit->setType(1);
                 $typeProduit->setSubType(null);
                 $typeProduit->setParent($subCategory);
-                $typeProduit->setSlug(strtolower((str_replace(' ','-',$genre))));
+                $typeProduit->setSlug(strtolower(str_replace(' ','-',$genre)));
                 $typeProduit->setUrl(strtolower(str_replace(' ','-',$genre)). '.webp');
                 $typeProduit->setAlt($genre);
                 $manager->persist($typeProduit);
+                $array_marks = ['Toshiba','MSI','Acer','Lenovo','Asus'];
+                $array_netbooks = ['portable-1.webp','portable-2.webp','portable-3.webp'];
+                foreach ($array_marks as $mark)
+                {
+                    $produit = new Product();
+                    $produit->setName($mark );
+                    $produit->setSlug(strtolower( $this->slugger->slug($produit->getName())));
+                    $produit->setDescription('Intel Core i3-1220P 16 Go SSD 480 Go 16 LED Full HD+ Wi-Fi 6E Webcam Windows 11 Famille');
+                    $produit->setPrice($faker->randomNumber(5,true));
+                    $produit->setStock($faker->randomNumber(5,true));
+                    $produit->setCreatedAt(new \DateTimeImmutable());
+                    $produit->setCategorie($typeProduit);
+                    foreach ($array_netbooks as $netbook)
+                    {
+                        $image = new Image();
+                        $image->setName($netbook);
+                        $image->setProduct($produit);
+                        $produit->addImage($image);
+                        $manager->persist($image);
+                    }
+                    $manager->persist($produit);
+                }
             }
             }
             if($subCategory->getSubType() === 2){
@@ -64,7 +93,7 @@ class ProductFixtures extends Fixture
             }
 
             if($subCategory->getSubType() === 3){
-                foreach ($array_pieces_détachées as $genre)
+                foreach ($array_pieces_detachees as $genre)
                 {
                     $typeProduit = new Category();
                     $typeProduit->setName($genre);
