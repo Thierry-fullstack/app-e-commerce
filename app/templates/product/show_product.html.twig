@@ -12,7 +12,7 @@
                     {% if produit.images is defined %}
                         {% for image in produit.images %}
                             {% if loop.first %}
-                    <img src=" {{ asset('/assets/uploads/product/') ~ image.name  }}" alt="{{ produit.name }}" class="thumbnail rounded active" onclick="changeImage(event, this.src)">
+                    <img src=" {{ asset('/assets/uploads/product/') ~ image.name  }}" alt="{{ produit.name }}" class="thumbnail rounded active" onclick="changeImage( event,this.src)">
                     {%  else %}
                     <img src="{{ asset('/assets/uploads/product/') ~ image.name  }}" alt="{{ produit.name }}" class="thumbnail rounded" onclick="changeImage(event, this.src)">
                             {%  endif %}
@@ -40,21 +40,29 @@
                 <p class="mb-4">{{ produit.description }}</p>
 
                 <div class="mb-4">
-                    <label for="quantity" class="form-label">Quantity:</label>
-                    <input type="number" class="form-control" id="quantity" value="1" min="1" style="width: 80px;">
+                    <label for="quantity" class="form-label text-primary">Quantité:</label>
+                    <input type="number" class="form-control border-1 border-primary" id="quantity" value="1" min="1" style="width: 80px;">
                 </div>
-                <button class="btn btn-primary btn-lg mb-3 me-2">
+                {% if produit.stock !== 0  %}
+                    <p class="text-primary fw-bolder">Stock disponible : {{ produit.stock }}</p>
+                <button class="btn btn-primary mb-3 me-2">
                     <i class="bi bi-cart-plus"></i> Ajouter au panier
                 </button>
-                <button class="btn btn-outline-secondary btn-lg mb-3">
+                    {% else %}
+                        <p class="text-primary fw-bolder">En rupture de stock</p>
+                        <button class="btn btn-danger mb-3 me-2">
+                            <i class="bi bi-stopwatch"></i> Indisponible
+                        </button>
+                {% endif %}
+                <button class="btn btn-secondary mb-3">
                     <i class="bi bi-heart"></i> Liste des souhaits
                 </button>
             </div>
         </div>
     </div>
     <script>
-        function changeImage(event, src) {
-            document.getElementById('mainImage').src = src;
+        function changeImage(event,src) {
+            document.querySelector('#mainImage').src = src;
             document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
             event.target.classList.add('active');
         }

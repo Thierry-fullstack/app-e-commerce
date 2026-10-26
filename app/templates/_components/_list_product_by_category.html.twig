@@ -11,7 +11,7 @@
                 <p class="text-muted">Caractéristique: {{ product.description }}</p>
             </div>
             <div class="col-md-3 text-end">
-                <p class="fw-bold text-primary">Prix : {{ product.price }} &#8364;</p>
+                <p class="fw-bold text-primary">Prix : {{ product.price * 0.01 | number_format(2,)  }} &#8364;</p>
                 <p class="fw-bolder small">stock disponible : {{ product.stock }}</p>
                 <a href="{{ path('app_product_show_article',{slug:product.slug}) }}" type="button" class="btn btn-sm btn-primary">Voir le produit</a>
             </div>

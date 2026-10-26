@@ -7,7 +7,6 @@ use App\Entity\Image;
 use App\Entity\Product;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Faker\Factory;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProductFixtures extends Fixture
@@ -16,8 +15,6 @@ class ProductFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create('fr_FR');
-
         /* informatique */
         $informatique = new Category();
         $informatique->setName('Informatique');
@@ -53,28 +50,8 @@ class ProductFixtures extends Fixture
                 $typeProduit->setUrl(strtolower(str_replace(' ','-',$genre)). '.webp');
                 $typeProduit->setAlt($genre);
                 $manager->persist($typeProduit);
-                $array_marks = ['Toshiba','MSI','Acer','Lenovo','Asus'];
-                $array_netbooks = ['portable-1.webp','portable-2.webp','portable-3.webp'];
-                foreach ($array_marks as $mark)
-                {
-                    $produit = new Product();
-                    $produit->setName($mark );
-                    $produit->setSlug(strtolower( $this->slugger->slug($produit->getName())));
-                    $produit->setDescription('Intel Core i3-1220P 16 Go SSD 480 Go 16 LED Full HD+ Wi-Fi 6E Webcam Windows 11 Famille');
-                    $produit->setPrice(mt_rand(1000,3000));
-                    $produit->setStock(mt_rand(10,20));
-                    $produit->setCreatedAt(new \DateTimeImmutable());
-                    $produit->setCategorie($typeProduit);
-                    foreach ($array_netbooks as $netbook)
-                    {
-                        $image = new Image();
-                        $image->setName($netbook);
-                        $image->setProduct($produit);
-                        $produit->addImage($image);
-                        $manager->persist($image);
-                    }
-                    $manager->persist($produit);
-                }
+                $pcPortables[] = $typeProduit;
+
             }
             }
             if($subCategory->getSubType() === 2){
@@ -89,6 +66,7 @@ class ProductFixtures extends Fixture
                     $typeProduit->setUrl(strtolower(str_replace(' ','-',$genre)). '.webp');
                     $typeProduit->setAlt($genre);
                     $manager->persist($typeProduit);
+                    $pcBureau[] = $typeProduit;
                 }
             }
 
@@ -270,6 +248,54 @@ class ProductFixtures extends Fixture
             $manager->persist($subCategory);
             $count++;
         }
+
+        $array_marks = ['Toshiba','MSI','Acer','Lenovo','Asus','Apple','Gigabyte'];
+        $array_netbooks = ['portable-1.webp','portable-2.webp','portable-3.webp'];
+        $type_produits = ['Intel Core i3-1220P 16 Go SSD 480 Go 16" LED Full HD+ Wi-Fi 6E Webcam Windows 11 Famille',
+        'Intel Core i5-1240P 16 Go SSD 960 Go 16" LED Full HD+ Wi-Fi 6E Webcam Windows 11 Famille',
+            'Intel Core i9-13900H 32 Go SSD 1 To 16" LED Full HD+ Wi-Fi 6/Bluetooth Webcam Windows 11 Famille',
+            'AMD Ryzen 7 350 32 Go SSD 1 To 18" LED QHD+ 165 Hz NVIDIA GeForce RTX 5070 8 Go DLSS 4 Wi-Fi 6E/Bluetooth Webcam Windows 11 Famille'];
+        for($i = 0; $i < 50; $i++ ) {
+                $produit = new Product();
+                $produit->setName($array_marks[random_int(0,count($array_marks)-1)]);
+                $produit->setSlug(strtolower($this->slugger->slug($produit->getName())));
+                $produit->setDescription(array_rand($type_produits));
+                $produit->setPrice(mt_rand(1000, 3000));
+                $produit->setStock(mt_rand(10, 20));
+                $produit->setCreatedAt(new \DateTimeImmutable());
+                $produit->setCategorie($pcPortables[random_int(0, count($pcPortables) - 1)]);
+                foreach ($array_netbooks as $netbook) {
+                    $image = new Image();
+                    $image->setName($netbook);
+                    $image->setProduct($produit);
+                    $produit->addImage($image);
+                    $manager->persist($image);
+                }
+                $manager->persist($produit);
+            }
+        $array_netbooks = ['ordinateur-1.webp','ordinateur-2.webp','ordinateur-3.webp','ordinateur-4.webp'];
+        for($i = 0; $i < 50; $i++ ) {
+
+                $produit = new Product();
+                $produit->setName($array_marks[random_int(0,count($array_marks)-1)]);
+                $produit->setSlug(strtolower($this->slugger->slug($produit->getName())));
+                $produit->setDescription(array_rand($type_produits));
+                $produit->setPrice(mt_rand(1000, 3000));
+                $produit->setStock(mt_rand(10, 20));
+                $produit->setCreatedAt(new \DateTimeImmutable());
+                $produit->setCategorie($pcBureau[random_int(0, count($pcBureau) - 1)]);
+                foreach ($array_netbooks as $netbook) {
+                    $image = new Image();
+                    $image->setName($netbook);
+                    $image->setProduct($produit);
+                    $produit->addImage($image);
+                    $manager->persist($image);
+                }
+                $manager->persist($produit);
+
+        }
         $manager->flush();
+
+
     }
 }
