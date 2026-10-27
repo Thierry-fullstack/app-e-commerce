@@ -30,7 +30,7 @@ class VerifyNumberType extends AbstractType
                 ],
             ])
             ->add('submit',SubmitType::class,
-                ['attr'=>['class'=>'btn btn-outline-secondary text-primary-emphasis text-capitalize w-100 '],'label'=>'Soumettre'])
+                ['attr'=>['class'=>'btn btn-secondary fw-bolder text-capitalize w-100 '],'label'=>'Soumettre'])
         ;
     }
 

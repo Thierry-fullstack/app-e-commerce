@@ -1,7 +1,7 @@
 
 {% if category is defined %}
     <section class="my-2" style="width: 18rem;">
-        <h6 class="card-title text-info mb-2">{{ category.name }}</h6>
+        <h6 class="card-title text-primary fw-semibold mb-2">{{ category.name }}</h6>
         <img src="{{ asset('assets/uploads/category/') ~ category.url }}" alt="{{ category.slug }}" class="img-fluid pe-4 h-50 w-50" alt="{{ category.slug }}">
         <div class="my-2">
             <a href="{{ path('app_product_list',{id:category.id}) }}" class="btn btn-sm btn-secondary mx-3">Voir les produits</a>

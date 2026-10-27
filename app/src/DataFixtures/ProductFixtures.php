@@ -27,7 +27,7 @@ class ProductFixtures extends Fixture
         $manager->persist($informatique);
 
         $array_informatique = ['Ordinateur portable', 'Ordinateur de bureau', 'Pièces détachées', 'Périphériques'];
-        $array_ordinateur_portable = ['PC portable','MacBook','PC reconditionné','MacBook reconditionné'];
+        $array_ordinateur_portable = ['Portable Windows','MacBook','Portable reconditionné','MacBook reconditionné'];
         $array_ordinateur_bureau = ['PC bureau','Ordinateur Mac','PC reconditionné','Mac reconditionné'];
         $array_pieces_detachees = ['carte mère','carte graphique','processeur','mémoire'];
         $array_peripheriques = ['Ecran','clavier souris','imprimante','webcam'];
@@ -259,7 +259,7 @@ class ProductFixtures extends Fixture
                 $produit = new Product();
                 $produit->setName($array_marks[random_int(0,count($array_marks)-1)]);
                 $produit->setSlug(strtolower($this->slugger->slug($produit->getName())));
-                $produit->setDescription(array_rand($type_produits));
+                $produit->setDescription($type_produits[random_int(0,count($type_produits)-1)]);
                 $produit->setPrice(mt_rand(1000, 3000));
                 $produit->setStock(mt_rand(10, 20));
                 $produit->setCreatedAt(new \DateTimeImmutable());
@@ -279,7 +279,7 @@ class ProductFixtures extends Fixture
                 $produit = new Product();
                 $produit->setName($array_marks[random_int(0,count($array_marks)-1)]);
                 $produit->setSlug(strtolower($this->slugger->slug($produit->getName())));
-                $produit->setDescription(array_rand($type_produits));
+                $produit->setDescription($type_produits[random_int(0,count($type_produits)-1)]);
                 $produit->setPrice(mt_rand(1000, 3000));
                 $produit->setStock(mt_rand(10, 20));
                 $produit->setCreatedAt(new \DateTimeImmutable());

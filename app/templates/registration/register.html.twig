@@ -13,7 +13,7 @@
                     <div class="row g-0">
                         <div class="col-md-3">
                             <div class="contact-info h-100">
-                                <p class="text-center text-info-emphasis fw-bolder" id="message-login">&nbsp;</p>
+                              <p class="text-center text-warning fw-bolder text-decoration-underline" id="message-login">&nbsp;</p>
                                 <ul class="list-group">
                                 <li class="contact-item list-group-horizontal">
                                         <small id="email-info" class="mb-0 mt-1">Email</small>
@@ -39,7 +39,7 @@
 
                         <div class="col-md-7">
                             <div class="mx-1">
-                                <h4 class="mb-3 mt-1 text-center fw-bolder text-primary">Inscription</h4>
+                                <h4 class="mb-3 mt-1 text-center fw-bolder">Inscription</h4>
                                 {{ form_start(registrationForm,{attr:{id:'registration_form',novalidate:'novalidate'}}) }}
                                 <div class="form-floating mb-3">
                                     {{ form_widget(registrationForm.email) }}
@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                                 <div class="d-grid">
-                                    {{ form_row(registrationForm.register,{ attr:{ class:'btn btn-outline-secondary text-capitalize col-12 mx-auto' } }) }}
+                                    {{ form_row(registrationForm.register,{ attr:{ class:'btn btn-secondary fw-bolder text-capitalize col-12 mx-auto' } }) }}
                                 </div>
                                 {{ form_end(registrationForm) }}
                                 <hr class="text-warning border-3" />

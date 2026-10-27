@@ -9,6 +9,7 @@ use App\Repository\ProductRepository;
 use App\Service\PhotoService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,11 +27,16 @@ final class ProductController extends AbstractController
      * @return Response
      */
     #[Route('/list', name: 'list')]
-    public function index(ProductRepository $productRepository): Response
+    public function index(ProductRepository $productRepository,PaginatorInterface $paginator,Request $request): Response
     {
-        return $this->render('admin/product/list_produits.html.twig', [
-            'produits'=>$productRepository->findBy([],['name'=>'asc'])
-        ]);
+        $articles = $productRepository->getProductsByCategory('3');
+        $datas = $productRepository->findBy([],['name'=>'ASC']);
+        $produits = $paginator->paginate(
+            $datas,
+            $request->query->getInt('page',1),
+            8
+        );
+        return $this->render('admin/product/list_produits.html.twig', ['produits'=>$produits]);
     }
 
     /**

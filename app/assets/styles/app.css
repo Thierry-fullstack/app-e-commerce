@@ -90,7 +90,7 @@ html body{
     font-size: 12px;
 }
 .password-info{
-    font-size: 11px;
+    font-size: 10px;
 }
 /*------------password register------------------*/
 
@@ -109,7 +109,7 @@ html body{
 }
 
 #password_criteria li {
-    font-size: 12px;
+    font-size: 11px;
     list-style: none;
 }
 
@@ -156,7 +156,7 @@ html body{
 }
 
 #password_criteria li {
-    font-size: 13px;
+    font-size: 10px;
 }
 #confirm_criteria li {
     font-size: 13px;
