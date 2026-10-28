@@ -26,17 +26,12 @@ final class ProductController extends AbstractController
      * @param ProductRepository $productRepository
      * @return Response
      */
-    #[Route('/list', name: 'list')]
-    public function index(ProductRepository $productRepository,PaginatorInterface $paginator,Request $request): Response
+    #[Route('/list', name: 'list',methods: ['GET'])]
+    public function index(ProductRepository $productRepository,Request $request): Response
     {
-        $articles = $productRepository->getProductsByCategory('3');
-        $datas = $productRepository->findBy([],['name'=>'ASC']);
-        $produits = $paginator->paginate(
-            $datas,
-            $request->query->getInt('page',1),
-            8
-        );
-        return $this->render('admin/product/list_produits.html.twig', ['produits'=>$produits]);
+
+        return $this->render('admin/product/list_produits.html.twig',
+            ['produits'=>$productRepository->getProductsByCategory($request->query->getInt('page',1))]);
     }
 
     /**

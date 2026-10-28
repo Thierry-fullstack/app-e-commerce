@@ -271,6 +271,7 @@ class ProductFixtures extends Fixture
                     $produit->addImage($image);
                     $manager->persist($image);
                 }
+                $produit->setIsPublished(true);
                 $manager->persist($produit);
             }
         $array_netbooks = ['ordinateur-1.webp','ordinateur-2.webp','ordinateur-3.webp','ordinateur-4.webp'];
@@ -291,6 +292,7 @@ class ProductFixtures extends Fixture
                     $produit->addImage($image);
                     $manager->persist($image);
                 }
+                $produit->setIsPublished(true);
                 $manager->persist($produit);
 
         }

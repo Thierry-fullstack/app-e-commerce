@@ -49,6 +49,9 @@ class Product
     #[ORM\OneToMany(targetEntity: OrderDetail::class, mappedBy: 'product')]
     private Collection $orderDetails;
 
+    #[ORM\Column]
+    private bool $isPublished = false;
+
 
     public function __construct()
     {
@@ -181,9 +184,23 @@ class Product
         return $this;
     }
 
+    public function isPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished(bool $isPublished): static
+    {
+        $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
     public function __toString(): string
     {
         return $this->name;
     }
+
+
 
 }

@@ -1,0 +1,9 @@
+<tr>
+    <th class="d-none d-md-table-cell" scope="row"><img src="{{ asset('assets/uploads/product/') ~ produit.images[0].name }}" alt="{{ produit.slug }}" class="img-fluid pe-4 h-25 w-25" ></th>
+    <td>{{ produit.id }}</td>
+    <td>{{ produit.name }}</td>
+    <td>{{ produit.price }}</td>
+    <td>{{ produit.stock }}</td>
+    <td class="d-none d-md-table-cell">{{ produit.categorie.name }}</td>
+    <td><a href="#" class="btn btn-sm btn-outline-secondary">Modifier</a></td>
+</tr>

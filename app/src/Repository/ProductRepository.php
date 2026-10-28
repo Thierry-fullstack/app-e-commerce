@@ -4,19 +4,24 @@ namespace App\Repository;
 
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Model\SearchData;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @extends ServiceEntityRepository<Product>
  */
 class ProductRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry,private readonly PaginatorInterface $paginator)
     {
         parent::__construct($registry, Product::class);
     }
 
+    /**
+     * @return array
+     */
     public function getProductsGroupedByCategory(): array
     {
         return $this->createQueryBuilder('p')
@@ -27,15 +32,44 @@ class ProductRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function getProductsByCategory($id):array
+    /**
+     * @param int $page
+     * @param Category|null $category
+     * @return \Knp\Component\Pager\Pagination\PaginationInterface
+     */
+    public function getProductsByCategory(int $page,?Category $category = null): \Knp\Component\Pager\Pagination\PaginationInterface
     {
-        return $this->createQueryBuilder('p')
-            ->join('p.categorie','c')
-            ->where('c.id = :id')
-            ->setParameter('id',$id)
-            ->orderBy('p.name','DESC')
-            ->getQuery()
-            ->getResult();
+        $data = $this->createQueryBuilder('p')
+            ->where('p.isPublished LIKE :state')
+            ->setParameter('state','1')
+            ->addOrderBy('p.categorie','DESC');
+
+        if(isset($category)){
+            $data = $data
+                ->join('p.categorie','c')
+                ->andWhere(':categorie IN (c)')
+                ->setParameter('categorie',$category);
+        }
+
+        $data->getQuery()->getResult();
+        return $this->paginator->paginate($data,$page, 8);
+    }
+
+    public function findBySearch(SearchData $searchData):PaginatorInterface
+    {
+        $data = $this->createQueryBuilder('p')
+            ->where('p.isPublished LIKE :state')
+            ->setParameter('state','1')
+            ->addOrderBy('p.name','DESC');
+
+        if(!empty($searchData->categories)){
+            $data = $data
+                ->join('p.categorie','c')
+                ->andWhere('c.id IN (:categorie')
+                ->setParameter('categorie',$searchData->categories);
+        }
+        $data = $data->getQuery()->getResult();
+        return $this->paginator->paginate($data,$searchData->page,8);
     }
 
     //    /**
