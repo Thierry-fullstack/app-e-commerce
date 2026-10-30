@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use App\Entity\Trait\CreatedAtTrait;
-use App\Entity\Trait\SlugTrait;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,19 +11,16 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
-
-    use createdAtTrait;
-    use SlugTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 100)]
     private ?string $name = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $description = null;
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
 
     #[ORM\Column]
     private ?int $price = null;
@@ -33,15 +28,24 @@ class Product
     #[ORM\Column]
     private ?int $stock = null;
 
-    #[ORM\ManyToOne(inversedBy: 'products')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Category $categorie = null;
+    #[ORM\Column]
+    private ?int $minimum = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column]
+    private ?bool $isPublished = null;
 
     /**
      * @var Collection<int, Image>
      */
-    #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'product', cascade: ['persist','remove'], orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'product', orphanRemoval: true)]
     private Collection $images;
+
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
 
     /**
      * @var Collection<int, OrderDetail>
@@ -49,9 +53,12 @@ class Product
     #[ORM\OneToMany(targetEntity: OrderDetail::class, mappedBy: 'product')]
     private Collection $orderDetails;
 
-    #[ORM\Column]
-    private bool $isPublished = false;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $description = null;
 
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Mark $mark = null;
 
     public function __construct()
     {
@@ -76,14 +83,14 @@ class Product
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getSlug(): ?string
     {
-        return $this->description;
+        return $this->slug;
     }
 
-    public function setDescription(string $description): static
+    public function setSlug(string $slug): static
     {
-        $this->description = $description;
+        $this->slug = $slug;
 
         return $this;
     }
@@ -112,14 +119,38 @@ class Product
         return $this;
     }
 
-    public function getCategorie(): ?Category
+    public function getMinimum(): ?int
     {
-        return $this->categorie;
+        return $this->minimum;
     }
 
-    public function setCategorie(?Category $categorie): static
+    public function setMinimum(int $minimum): static
     {
-        $this->categorie = $categorie;
+        $this->minimum = $minimum;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function isPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished(bool $isPublished): static
+    {
+        $this->isPublished = $isPublished;
 
         return $this;
     }
@@ -154,6 +185,18 @@ class Product
         return $this;
     }
 
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, OrderDetail>
      */
@@ -184,23 +227,27 @@ class Product
         return $this;
     }
 
-    public function isPublished(): ?bool
+    public function getDescription(): ?string
     {
-        return $this->isPublished;
+        return $this->description;
     }
 
-    public function setIsPublished(bool $isPublished): static
+    public function setDescription(string $description): static
     {
-        $this->isPublished = $isPublished;
+        $this->description = $description;
 
         return $this;
     }
 
-    public function __toString(): string
+    public function getMark(): ?Mark
     {
-        return $this->name;
+        return $this->mark;
     }
 
+    public function setMark(?Mark $mark): static
+    {
+        $this->mark = $mark;
 
-
+        return $this;
+    }
 }

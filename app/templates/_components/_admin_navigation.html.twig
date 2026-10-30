@@ -1,30 +1,47 @@
 <aside class="col-md-2 bg-white p-2 ">
     <article class="card mb-1">
-        <div class="card-header">
+        <div class="card-header bg-primary-subtle ">
+            Marques
+        </div>
+        <div class="card-body">
+            <p><a href="{{ path('app_admin_mark_list') }}" class="text-decoration-none"><i class="bi bi-distribute-vertical"></i> Liste </a></p>
+            <p><a href="{{ path('app_admin_mark_add') }}" class="text-decoration-none"><i class="bi bi-plus-circle"></i> Ajouter une marque</a></p>
+        </div>
+    </article>
+    <article class="card mb-1">
+        <div class="card-header bg-primary-subtle ">
+            Types
+        </div>
+        <div class="card-body">
+            <p><a href="#" class="text-decoration-none"><i class="bi bi-distribute-vertical"></i> Liste </a></p>
+            <p><a href="" class="text-decoration-none"><i class="bi bi-plus-circle"></i> Ajouter un type</a></p>
+        </div>
+    </article>
+    <article class="card mb-1">
+        <div class="card-header bg-primary-subtle">
             Catégories
         </div>
         <div class="card-body">
-            <p><a href="#" class="text-decoration-none"><i class="bi bi-distribute-vertical"></i> Liste des catégories</a></p>
+            <p><a href="#" class="text-decoration-none"><i class="bi bi-distribute-vertical"></i> Liste</a></p>
             <p><a href="" class="text-decoration-none"><i class="bi bi-plus-circle"></i> Ajouter une catégorie</a></p>
-            <p><a href="" class="text-decoration-none"><i class="bi bi-file-earmark-minus"></i> Supprimer une catégorie</a></p>
         </div>
     </article>
     <article class="card mb-1">
-        <div class="card-header">
-            Produits
+        <div class="card-header bg-primary-subtle">
+            Articles
         </div>
         <div class="card-body">
-            <p><a href="{{ path('app_admin_product_list') }}" class="text-decoration-none"><i class="bi bi-shop"></i> Liste des articles</a></p>
+            <p><a href="{{ path('app_admin_product_list') }}" class="text-decoration-none"><i class="bi bi-distribute-vertical"></i> Liste</a></p>
             <p><a href="{{ path('app_admin_product_add') }}" class="text-decoration-none"><i class="bi bi-plus-circle-dotted"></i> Ajouter un article</a></p>
-            <p><a href="" class="text-decoration-none"><i class="bi bi-file-earmark-minus"></i> Supprimer un article</a></p>
         </div>
     </article>
     <article class="card mb-1">
-        <div class="card-header">
+        <div class="card-header bg-primary-subtle">
             Utilisateurs
         </div>
         <div class="card-body">
-            <p><a href="#" class="text-decoration-none"><i class="bi bi-person-circle"></i> Liste des membres</a></p>
+            <p><a href="#" class="text-decoration-none"><i class="bi bi-distribute-vertical"></i> Liste</a></p>
+            <p><a href="#" class="text-decoration-none"><i class="bi bi-plus-circle-dotted"></i> Modifier un compte</a></p>
         </div>
     </article>
 </aside>

@@ -40,6 +40,10 @@ return [
         'path' => './assets/js/showProduct.js',
         'entrypoint' => true,
     ],
+    'ajax-mark'=>[
+        'path'=>'./assets/js/ajaxMark/ajaxMark.js',
+        'entrypoint'=>true,
+    ],
     '@hotwired/turbo' => [
         'version' => '8.0.23',
     ],

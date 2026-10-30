@@ -239,5 +239,46 @@ html body{
     opacity: 1;
 }
 
+/* =========================================================
+   SECTION SPACING
+   This is the main fix for the "too cramped / looks like a
+   CV" feedback — every section gets generous top/bottom
+   space, and titles get more room to breathe.
+   ========================================================= */
+
+section {
+    padding: 100px 0;
+}
+
+.bg-light-alt {
+    background-color: #f7f8fa;
+}
+
+.section-title {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 55px auto;
+}
+
+.section-title .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #0d6efd;
+}
+
+.section-title h2 {
+    font-weight: 700;
+    font-size: 2.2rem;
+    margin-top: 8px;
+}
+
+.section-title p {
+    color: #6c757d;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
 
 

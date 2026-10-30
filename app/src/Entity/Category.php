@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Entity\Trait\SlugTrait;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,48 +10,36 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
 {
-    use SlugTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 50)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'categories')]
-    private ?self $parent = null;
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
 
-    /**
-     * @var Collection<int, self>
-     */
-    #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parent')]
-    private Collection $categories;
+    #[ORM\Column(length: 255)]
+    private ?string $alt = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+
+    #[ORM\ManyToOne(inversedBy: 'categories')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Type $type = null;
 
     /**
      * @var Collection<int, Product>
      */
-    #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'categorie')]
+    #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'category')]
     private Collection $products;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $slug = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $url = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $alt = null;
-
-    #[ORM\Column]
-    private ?int $type = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $subType = null;
 
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
         $this->products = new ArrayCollection();
     }
 
@@ -73,44 +60,51 @@ class Category
         return $this;
     }
 
-    public function getParent(): ?self
+    public function getSlug(): ?string
     {
-        return $this->parent;
+        return $this->slug;
     }
 
-    public function setParent(?self $parent): static
+    public function setSlug(string $slug): static
     {
-        $this->parent = $parent;
+        $this->slug = $slug;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, self>
-     */
-    public function getCategories(): Collection
+
+    public function getAlt(): ?string
     {
-        return $this->categories;
+        return $this->alt;
     }
 
-    public function addCategory(self $category): static
+    public function setAlt(string $alt): static
     {
-        if (!$this->categories->contains($category)) {
-            $this->categories->add($category);
-            $category->setParent($this);
-        }
+        $this->alt = $alt;
 
         return $this;
     }
 
-    public function removeCategory(self $category): static
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
-        if ($this->categories->removeElement($category)) {
-            // set the owning side to null (unless already changed)
-            if ($category->getParent() === $this) {
-                $category->setParent(null);
-            }
-        }
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): static
+    {
+        $this->type = $type;
 
         return $this;
     }
@@ -127,7 +121,7 @@ class Category
     {
         if (!$this->products->contains($product)) {
             $this->products->add($product);
-            $product->setCategorie($this);
+            $product->setCategory($this);
         }
 
         return $this;
@@ -137,75 +131,11 @@ class Category
     {
         if ($this->products->removeElement($product)) {
             // set the owning side to null (unless already changed)
-            if ($product->getCategorie() === $this) {
-                $product->setCategorie(null);
+            if ($product->getCategory() === $this) {
+                $product->setCategory(null);
             }
         }
 
         return $this;
     }
-
-    public function getUrl(): ?string
-    {
-        return $this->url;
-    }
-
-    public function setUrl(?string $url): static
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    public function getAlt(): ?string
-    {
-        return $this->alt;
-    }
-
-    public function setAlt(?string $alt): static
-    {
-        $this->alt = $alt;
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(?string $slug): void
-    {
-        $this->slug = $slug;
-    }
-    public function __toString(): string
-    {
-        return $this->name;
-    }
-
-    public function getType(): ?int
-    {
-        return $this->type;
-    }
-
-    public function setType(int $type): static
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    public function getSubType(): ?int
-    {
-        return $this->subType;
-    }
-
-    public function setSubType(?int $subType): static
-    {
-        $this->subType = $subType;
-
-        return $this;
-    }
-
-
 }

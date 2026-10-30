@@ -9,7 +9,6 @@ use App\Repository\ProductRepository;
 use App\Service\PhotoService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,9 +28,9 @@ final class ProductController extends AbstractController
     #[Route('/list', name: 'list',methods: ['GET'])]
     public function index(ProductRepository $productRepository,Request $request): Response
     {
+       return $this->render('admin/product/list_produits.html.twig', [
 
-        return $this->render('admin/product/list_produits.html.twig',
-            ['produits'=>$productRepository->getProductsByCategory($request->query->getInt('page',1))]);
+            'produits'=>$productRepository->getProductsByCategory($request->query->getInt('page',1))]);
     }
 
     /**

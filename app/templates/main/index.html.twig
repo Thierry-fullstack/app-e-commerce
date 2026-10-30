@@ -8,10 +8,10 @@
         <div class="col-md-12">
         <h2 class="text-info-emphasis text-center mt-5">Bienvenue dans notre boutique</h2>
         </div>
-        {% for category in categories %}
+        {% for category in allTypes %}
             {% if category.parent === null %}
             <h4 class="my-2 fst-italic">{{ category.name }}</h4>
-            {% elseif category.subType !==null  %}
+            {% else  %}
         <div class="col-lg-3 px-5">
             {% include '_components/_card_category.html.twig' with { category:category} %}
         </div>

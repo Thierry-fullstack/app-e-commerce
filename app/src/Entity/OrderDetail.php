@@ -20,10 +20,11 @@ class OrderDetail
     #[ORM\JoinColumn(nullable: false)]
     private ?Order $commande = null;
 
-    #[ORM\Id]
     #[ORM\ManyToOne(inversedBy: 'orderDetails')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Product $product = null;
+
+
 
     public function getQuantity(): ?int
     {
@@ -72,4 +73,5 @@ class OrderDetail
 
         return $this;
     }
+
 }

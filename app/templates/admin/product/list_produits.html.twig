@@ -3,11 +3,11 @@
 {% block title %}Gestion - Articles{% endblock %}
 
 {% block body %}
-    <div class="container py-5">
+    <div class="container-xxl py-5">
         <h3 class="mb-5 text-center text-primary">Gestion des articles</h3>
         <div class="row">
-            <hr class="my-3 border-3 text-primary" />
-        <div class="col-12">
+            <div class="col-12">
+                {% include '_components/dropdown.html.twig' with { options: allCategories} %}
             <table class="table table-hover table-sm table-bordered px-1 py-1">
                 <thead>
                 <tr class="table-warning">
@@ -33,9 +33,7 @@
             <nav aria-label="Pagination" class="d-flex justify-content-center my-3">
                 {{ knp_pagination_render(produits) }}
             </nav>
-
-        </div>
-
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle marque{% endblock %}
+{% block importmap %}
+    {{ importmap(['app','ajax-mark']) }}
+{% endblock %}
+{% block body %}
+
+    <section class="bg-light-alt">
+        <div class="container">
+            <div class="section-title">
+                <h3>Nouvelle marque</h3>
+                <p>Indication : <span class="eyebrow">Télécharger le logo de la marque</span></p>
+            </div>
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    {{ form_start(form,{attr:{id:'newMarkForm',novalidate:'novalidate'}}) }}
+                    <div class="form-floating mb-3">
+                        {{ form_widget(form.name) }}
+                        {{ form_label(form.name)}}
+                        <div class="text-danger small">
+                            {{ form_errors(form.name)}}
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
