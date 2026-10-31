@@ -10,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: TypeRepository::class)]
 class Type
 {
+
+    public const TYPE_ADD_SUCCESSFULLY = 'TYPE_ADD_SUCCESSFULLY';
+    public const TYPE_BAD_RESPONSE = 'TYPE_BAD_RESPONSE';
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -20,9 +23,6 @@ class Type
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $url = null;
 
     #[ORM\Column(length: 255)]
     private ?string $alt = null;
@@ -70,18 +70,6 @@ class Type
         return $this;
     }
 
-    public function getUrl(): ?string
-    {
-        return $this->url;
-    }
-
-    public function setUrl(string $url): static
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
     public function getAlt(): ?string
     {
         return $this->alt;
@@ -93,8 +81,6 @@ class Type
 
         return $this;
     }
-
-
 
     /**
      * @return Collection<int, Category>

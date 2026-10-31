@@ -3,6 +3,42 @@
 {% block title %}Liste marques{% endblock %}
 
 {% block body %}
-{{ dump(marks) }}
+    <section>
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('app_admin_index') }}"><span class="badge bg-primary">Administration</span></a></li>
+                    <li class="breadcrumb-item"><a>Marques</a></li>
+                    <li class="breadcrumb-item"><a>Liste</a></li>
+                </ol>
+            </nav>
+            <div class="row">
+                <div class="col-md-10 mx-auto">
+                    {% if marks is defined %}
+                        <fieldset class="text-primary-emphasis" ><legend class="d-flex justify-content-center h3">Liste des marques</legend></fieldset>
+                        <table class="table table-hover table-bordered" id="marks_list">
+                            <thead>
+                            <tr class="table-active">
+                                <th class="text-warning" scope="col">Photo</th>
+                                <th class="text-warning d-none d-sm-table-cell" scope="col">N°</th>
+                                <th class="text-warning" scope="col">Nom</th>
+                                <th class="text-warning" scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for mark in marks %}
+                                    {% include '_components/_list_marks.html.twig' %}
+                            {% endfor %}
+                        </table>
+                        <hr class="my-3 text-primary" />
+                        <!-- Pagination-->
+                        <nav aria-label="Pagination" class="d-flex justify-content-center">
+                            {{ knp_pagination_render(marks) }}
+                        </nav>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
 
 {% endblock %}

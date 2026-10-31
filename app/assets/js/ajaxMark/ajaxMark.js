@@ -34,9 +34,10 @@ if(newMarkForm){
         removeAllErrors();
         switch (response.code){
             case 'MARK_ADD_SUCCESSFULLY':
+                mark_form_name.value='';
                 newMarkForm.reset();
                 marks_list.innerHTML += response.html;
-
+                window.document.reload();
                 break;
             case 'MARK_BAD_RESPONSE':
                 handleErrors(response.errors);
@@ -44,7 +45,6 @@ if(newMarkForm){
         }
     }
 }
-
 
 const removeError = function(field){
     field.classList.remove('is-invalid');

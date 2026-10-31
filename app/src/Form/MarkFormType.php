@@ -19,7 +19,7 @@ class MarkFormType extends AbstractType
     {
         $builder
             ->add('name',FileType::class,['attr'=>['class'=>'form-control form-control-sm'],
-                'mapped'=>false,'required'=>true,'label'=>'Nom',
+                'mapped'=>false,'required'=>true,'label'=>false,
                 'label_attr'=>['class'=>'col-sm-2 col-form-label'],
                 'constraints'=>([
                     new Sequentially([
@@ -30,7 +30,7 @@ class MarkFormType extends AbstractType
                     ])
                 ])
                 ])
-            ->add('submit',SubmitType::class,['attr'=>['class'=>'btn btn-sm btn-outline-primary w-100'],
+            ->add('submit',SubmitType::class,['attr'=>['class'=>'btn btn-sm btn-primary w-100 '],
                 'label'=>'Soumettre'])
         ;
     }

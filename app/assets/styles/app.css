@@ -279,7 +279,8 @@ section {
     margin-top: 10px;
     margin-bottom: 0;
 }
-.list_photos_mark{
+.list_photos_mark,.list_photos_type
+{
     height: 60px;
     width: 60px;
 }

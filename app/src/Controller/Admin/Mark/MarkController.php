@@ -6,6 +6,7 @@ use App\Entity\Mark;
 use App\Form\MarkFormType;
 use App\FormAjax\AjaxMarkService;
 use App\Repository\MarkRepository;
+use Doctrine\ORM\EntityNotFoundException;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,22 +17,48 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/mark',name:'app_admin_mark_')]
 final class MarkController extends AbstractController
 {
+
+    /**
+     * @param MarkRepository $markRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/list', name: 'list',methods: ['GET'])]
-    public function index(MarkRepository $markRepository): Response
+    public function index(MarkRepository $markRepository,PaginatorInterface $paginator, Request $request): Response
     {
-        return $this->render('mark/index.html.twig',['marks'=>$markRepository->findBy([],['slug'=>'ASC'])]);
+        try {
+            $datas = $markRepository->findBy([], ['slug' => 'ASC']);
+            $marks = $paginator->paginate($datas, $request->query->getInt('page', 1), 5);
+            return $this->render('mark/index.html.twig', ['marks' => $marks]);
+        }catch(EntityNotFoundException $exception){
+            $this->addFlash('warning','Connection impossible :' .$exception );
+            return $this->redirectToRoute('app_admin_index');
+        }
     }
 
+    /**
+     * @param RequestStack $requestStack
+     * @param AjaxMarkService $markService
+     * @param Request $request
+     * @param MarkRepository $markRepository
+     * @param PaginatorInterface $paginator
+     * @return Response
+     */
     #[Route('/add', name: 'add',methods: ['GET','POST'])]
     public function addMark(RequestStack $requestStack,AjaxMarkService $markService,Request $request,
                             MarkRepository $markRepository,PaginatorInterface $paginator): Response
     {
-        $datas = $markRepository->findBy([],['slug'=>'ASC']);
-        $marks = $paginator->paginate(
-            $datas,
-            $request->query->getInt('page',1),
-            5
-        );
+        try {
+            $datas = $markRepository->findBy([], ['slug' => 'ASC']);
+            $num = ceil(count($datas)/5);
+            $marks = $paginator->paginate(
+                $datas,
+                $request->query->getInt('page', $num), 5);
+        }catch(EntityNotFoundException $exception){
+            $this->addFlash('warning','Connection impossible :' .$exception );
+            return $this->redirectToRoute('app_admin_index');
+        }
         $mark = new Mark();
         $request = $requestStack->getMainRequest();
         $form = $this->createForm(MarkFormType::class,$mark);

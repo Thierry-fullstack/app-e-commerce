@@ -44,6 +44,10 @@ return [
         'path'=>'./assets/js/ajaxMark/ajaxMark.js',
         'entrypoint'=>true,
     ],
+    'ajax-type'=>[
+        'path'=>'./assets/js/ajaxType/ajaxType.js',
+        'entrypoint'=>true,
+    ],
     '@hotwired/turbo' => [
         'version' => '8.0.23',
     ],
