@@ -247,7 +247,7 @@ html body{
    ========================================================= */
 
 section {
-    padding: 100px 0;
+    padding: 10px 0;
 }
 
 .bg-light-alt {
@@ -257,7 +257,7 @@ section {
 .section-title {
     text-align: center;
     max-width: 650px;
-    margin: 0 auto 55px auto;
+    margin: 0 auto 5px auto;
 }
 
 .section-title .eyebrow {
@@ -278,6 +278,10 @@ section {
     color: #6c757d;
     margin-top: 10px;
     margin-bottom: 0;
+}
+.list_photos_mark{
+    height: 60px;
+    width: 60px;
 }
 
 

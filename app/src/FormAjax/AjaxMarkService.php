@@ -16,8 +16,8 @@ readonly class AjaxMarkService
 {
     private const FILE_MARKS = 'mark';
     public function __construct(
-        private readonly EntityManagerInterface $em, private readonly Environment $twig,
-        private readonly PhotoService $photoService,private readonly SluggerInterface $slugger )
+        private EntityManagerInterface $em, private Environment $twig,
+        private PhotoService $photoService,private  SluggerInterface $slugger )
     {
     }
 
@@ -37,17 +37,18 @@ readonly class AjaxMarkService
         $mark = $form->getData();
         /** @var UploadedFile $name */
         $name = $form->get('name')->getData();
+        $mark->setAlt(str_replace('.'.$name->getClientOriginalExtension(),'',$name->getClientOriginalName()));
+        $mark->setSlug($this->slugger->slug(str_replace('.'.$name->getClientOriginalExtension(),'',$name->getClientOriginalName()))->lower());
         if($name->getClientOriginalExtension()==='jpeg' || $name->getClientOriginalExtension() ==='jpg'){
-            $fichier = $this->photoService->add($name,uniqid(more_entropy: true). '-' . $name->getClientOriginalName(),self::FILE_MARKS,300,300);
+            $fichier = $this->photoService->add($name,uniqid(more_entropy: true). '-' . $mark->getSlug(),self::FILE_MARKS,300,300);
             $mark->setName($fichier);
-            $mark->setAlt(str_replace('.'.$name->getClientOriginalExtension(),'',$name->getClientOriginalName()));
-            $mark->setSlug($this->slugger->slug(str_replace('.'.$name->getClientOriginalExtension(),'',$name->getClientOriginalName()))->lower());
         }
         try{
             $this->em->persist($mark);
             $this->em->flush();
             return new JsonResponse([
-                'code'=>Mark::ADD_SUCCESSFULLY,
+                'code'=>Mark::MARK_ADD_SUCCESSFULLY,
+                'html'=>$this->twig->render('_components/_list_marks.html.twig',['mark'=>$mark])
             ]);
         }catch (EntityNotFoundException $exception){
             $this->addFlash('warning','Enregistrement impossible '. $exception );
@@ -58,7 +59,7 @@ readonly class AjaxMarkService
     private function handleInvalidForm(FormInterface $form): JsonResponse
     {
         return new JsonResponse([
-           'code'=>Mark::BAD_RESPONSE,
+           'code'=>Mark::MARK_BAD_RESPONSE,
            'errors'=>$this->getErrorMessages($form)
         ]);
     }

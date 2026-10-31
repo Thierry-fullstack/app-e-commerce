@@ -11,8 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Mark
 {
 
-    public const ADD_SUCCESSFULLY = 'MARK_ADD_SUCCESSFULLY';
-    public const BAD_RESPONSE = 'MARK_BAD_RESPONSE';
+    public const MARK_ADD_SUCCESSFULLY = 'MARK_ADD_SUCCESSFULLY';
+    public const MARK_BAD_RESPONSE = 'MARK_BAD_RESPONSE';
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
