@@ -29,7 +29,8 @@ final class MarkController extends AbstractController
     {
         try {
             $datas = $markRepository->findBy([], ['slug' => 'ASC']);
-            $marks = $paginator->paginate($datas, $request->query->getInt('page', 1), 5);
+            $num = 0 ? ceil(count($datas)/ 5): 1;
+            $marks = $paginator->paginate($datas, $request->query->getInt('page', $num), 5);
             return $this->render('mark/index.html.twig', ['marks' => $marks]);
         }catch(EntityNotFoundException $exception){
             $this->addFlash('warning','Connection impossible :' .$exception );
@@ -51,7 +52,7 @@ final class MarkController extends AbstractController
     {
         try {
             $datas = $markRepository->findBy([], ['slug' => 'ASC']);
-            $num = ceil(count($datas)/5);
+            $num = 0 ? ceil(count($datas)/ 5): 1;
             $marks = $paginator->paginate(
                 $datas,
                 $request->query->getInt('page', $num), 5);

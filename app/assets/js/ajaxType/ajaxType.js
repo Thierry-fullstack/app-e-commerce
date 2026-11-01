@@ -37,8 +37,9 @@ if(newTypeForm){
             case 'TYPE_ADD_SUCCESSFULLY':
                 type_form_name.value='';
                 newTypeForm.reset();
+                window.location.reload();
                 types_list.innerHTML += response.html;
-                window.document.reload();
+
                 break;
             case 'TYPE_BAD_RESPONSE':
                 handleErrors(response.errors);

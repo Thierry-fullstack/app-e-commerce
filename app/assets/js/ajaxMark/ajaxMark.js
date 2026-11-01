@@ -36,8 +36,9 @@ if(newMarkForm){
             case 'MARK_ADD_SUCCESSFULLY':
                 mark_form_name.value='';
                 newMarkForm.reset();
+                window.location.reload();
                 marks_list.innerHTML += response.html;
-                window.document.reload();
+
                 break;
             case 'MARK_BAD_RESPONSE':
                 handleErrors(response.errors);

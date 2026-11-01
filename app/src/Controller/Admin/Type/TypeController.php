@@ -35,13 +35,13 @@ final class TypeController extends AbstractController
     {
         try{
             $datas = $typeRepository->findBy([],['slug'=>'ASC']);
-            //$num = ceil(count($datas)/ 5);
-
-            $types = $paginator->paginate($datas,$request->query->getInt('page',1),5);
+            $num = 0 ? ceil(count($datas)/ 5): 1;
+            $types = $paginator->paginate($datas,$request->query->getInt('page',$num),5);
         }catch (EnvNotFoundException $exception){
             $this->addFlash('warning','Connection impossible :' .$exception );
             return $this->redirectToRoute('app_admin_index');
         }
+
         $type = new Type();
         $request = $requestStack->getMainRequest();
         $form = $this->createForm(TypeFormType::class,$type);
@@ -51,6 +51,7 @@ final class TypeController extends AbstractController
                 return $typeService->handleFormData($form);
             }
         }
+
 
         return $this->render('admin/type/add.html.twig',['form'=>$form->createView(),'types'=>$types]);
     }
