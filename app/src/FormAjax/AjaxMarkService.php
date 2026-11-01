@@ -15,12 +15,17 @@ use Twig\Environment;
 readonly class AjaxMarkService
 {
     private const FILE_MARKS = 'mark';
+
     public function __construct(
         private EntityManagerInterface $em, private Environment $twig,
         private PhotoService $photoService,private  SluggerInterface $slugger )
     {
     }
 
+    /**
+     * @param FormInterface $form
+     * @return JsonResponse
+     */
     public function handleFormData(FormInterface $form): JsonResponse
     {
         if($form->isValid()){
@@ -32,6 +37,13 @@ readonly class AjaxMarkService
         }
     }
 
+    /**
+     * @param FormInterface $form
+     * @return JsonResponse
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     private function handleValidForm(FormInterface $form): JsonResponse
     {
         $mark = $form->getData();
@@ -56,6 +68,11 @@ readonly class AjaxMarkService
         }
 
     }
+
+    /**
+     * @param FormInterface $form
+     * @return JsonResponse
+     */
     private function handleInvalidForm(FormInterface $form): JsonResponse
     {
         return new JsonResponse([
@@ -63,6 +80,11 @@ readonly class AjaxMarkService
            'errors'=>$this->getErrorMessages($form)
         ]);
     }
+
+    /**
+     * @param FormInterface $form
+     * @return array
+     */
     private function getErrorMessages(FormInterface $form):array
     {
         $errors = [];

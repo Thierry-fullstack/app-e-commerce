@@ -1,0 +1,18 @@
+
+    <tr class="table-default">
+        <th scope="row">
+            <img
+                src="{{ asset('/assets/uploads/category/mini/300x300-') ~ category.name }}"
+                class="img-thumbnail float-start list_photos_category"
+                alt="{{ category.slug }}"
+            />
+        </th>
+        <td class="d-none d-sm-table-cell">{{ category.id }}</td>
+        <td>{{ category.slug }}</td>
+        <td>{{ category.type.slug }}</td>
+        <td><a href="#" type="button" class="btn btn-sm btn-outline-warning">Supprimer</a></td>
+    </tr>
+
+
+
+

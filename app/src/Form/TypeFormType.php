@@ -5,6 +5,7 @@ namespace App\Form;
 
 use App\Entity\Type;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -31,6 +32,8 @@ class TypeFormType extends AbstractType
                     ])
                 ])
             ])
+            ->add('isParent',CheckboxType::class,['attr'=>['class'=>'form-check-input'],
+                'label'=>'Type principal'])
             ->add('submit',SubmitType::class,['attr'=>['class'=>'btn btn-sm btn-primary w-100 '],
                 'label'=>'Soumettre'])
         ;

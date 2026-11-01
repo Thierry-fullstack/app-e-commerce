@@ -17,6 +17,12 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/type',name:'app_admin_type_')]
 final class TypeController extends AbstractController
 {
+    /**
+     * @param TypeRepository $typeRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/list', name: 'list',methods: ['GET'])]
     public function index(TypeRepository $typeRepository,PaginatorInterface $paginator,Request $request): Response
     {
@@ -29,6 +35,15 @@ final class TypeController extends AbstractController
             return $this->redirectToRoute('app_admin_index');
         }
     }
+
+    /**
+     * @param RequestStack $requestStack
+     * @param AjaxTypeService $typeService
+     * @param Request $request
+     * @param TypeRepository $typeRepository
+     * @param PaginatorInterface $paginator
+     * @return Response
+     */
     #[Route('/add', name: 'add',methods: ['GET','POST'])]
     public function addType(RequestStack $requestStack,AjaxTypeService $typeService,Request $request,
     TypeRepository $typeRepository,PaginatorInterface $paginator): Response

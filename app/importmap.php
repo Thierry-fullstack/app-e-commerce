@@ -48,6 +48,10 @@ return [
         'path'=>'./assets/js/ajaxType/ajaxType.js',
         'entrypoint'=>true,
     ],
+    'ajax-category'=>[
+        'path'=>'./assets/js/ajaxCategory/ajaxCategory.js',
+        'entrypoint'=>true,
+    ],
     '@hotwired/turbo' => [
         'version' => '8.0.23',
     ],

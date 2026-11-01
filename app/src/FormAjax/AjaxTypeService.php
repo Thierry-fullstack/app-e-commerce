@@ -21,6 +21,10 @@ public function __construct(
   private PhotoService $photoService,private SluggerInterface $slugger
 ){}
 
+    /**
+     * @param FormInterface $form
+     * @return JsonResponse
+     */
     public function handleFormData(FormInterface $form): JsonResponse
     {
         if($form->isValid()){
@@ -32,6 +36,13 @@ public function __construct(
         }
     }
 
+    /**
+     * @param FormInterface $form
+     * @return JsonResponse
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     private function handleValidForm(FormInterface $form): JsonResponse
     {
         $type = $form->getData();
@@ -56,6 +67,11 @@ public function __construct(
         }
 
     }
+
+    /**
+     * @param FormInterface $form
+     * @return JsonResponse
+     */
     private function handleInvalidForm(FormInterface $form): JsonResponse
     {
         return new JsonResponse([
@@ -63,6 +79,11 @@ public function __construct(
             'errors'=>$this->getErrorMessages($form)
         ]);
     }
+
+    /**
+     * @param FormInterface $form
+     * @return array
+     */
     private function getErrorMessages(FormInterface $form):array
     {
         $errors = [];

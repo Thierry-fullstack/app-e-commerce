@@ -10,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
 {
+
+    public const CATEGORY_ADD_SUCCESSFULLY = 'CATEGORY_ADD_SUCCESSFULLY';
+    public const CATEGORY_BAD_RESPONSE = 'CATEGORY_BAD_RESPONSE';
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

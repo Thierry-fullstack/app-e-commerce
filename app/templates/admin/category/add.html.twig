@@ -1,0 +1,79 @@
+ {% extends 'base.html.twig' %}
+
+    {% block title %}Nouvelle catégorie{% endblock %}
+    {% block importmap %}
+        {{ importmap(['app','ajax-category']) }}
+    {% endblock %}
+    {% block body %}
+        <section>
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ path('app_admin_index') }}"><span class="badge bg-primary">Administration</span></a></li>
+                        <li class="breadcrumb-item"><a>Catégorie</a></li>
+                        <li class="breadcrumb-item"><a>Nouvelle</a></li>
+                    </ol>
+                </nav>
+                <div class="section-title">
+                    <h3 class="text-primary-emphasis">Nouvelle catégorie</h3>
+                    <p class="text-primary">Indication : <span class="text-capitalize text-warning-emphasis">Télécharger le logo de la catégorie</span></p>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 mx-auto">
+                        {{ form_start(form,{attr:{id:'newCategoryForm',novalidate:'novalidate'}}) }}
+                        <div class="form-floating mb-3">
+                            {{ form_widget(form.name) }}
+                            {{ form_label(form.name) }}
+                            <div class="text-danger small">
+                                {{ form_errors(form.name) }}
+                            </div>
+                        </div>
+                        <div class="form-control mb-3 bg-light">
+                            {{ form_label(form.type) }}
+                            {{ form_widget(form.type) }}
+
+                            <div class="text-danger small">
+                                {{ form_errors(form.type) }}
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            {{ form_row(form.submit) }}
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-md-8 mx-auto">
+                        {% if categories is not empty %}
+                            <fieldset class="text-primary" ><legend class="d-flex justify-content-center">Liste des catégories</legend></fieldset>
+                            <table class="table table-hover table-bordered" id="categories_list">
+                                <thead>
+                                <tr class="table-light">
+                                    <th class="text-primary" scope="col">Photo</th>
+                                    <th class="text-primary d-none d-sm-table-cell" scope="col">N°</th>
+                                    <th class="text-primary" scope="col">Nom</th>
+                                    <th class="text-primary" scope="col">Type</th>
+                                    <th class="text-primary" scope="col">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for category in categories %}
+                                    {% include '_components/_list_categories.html.twig' with { categories : categories } %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            <!-- Pagination-->
+                            <nav aria-label="Pagination" class="d-flex justify-content-center">
+                                {{ knp_pagination_render(categories) }}
+                            </nav>
+                            <hr class="my-3 text-primary" />
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endblock %}
+
+

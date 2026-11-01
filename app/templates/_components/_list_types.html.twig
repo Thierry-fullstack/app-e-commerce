@@ -9,6 +9,12 @@
         </th>
         <td class="d-none d-sm-table-cell">{{ type.id }}</td>
         <td>{{ type.slug }}</td>
+        <td class="d-none d-sm-table-cell">{% if type.isParent == 1 %}
+                <span class="text-success">Vrai</span>
+              {% else %}
+                  <span class="text-danger">Faux</span>
+            {% endif %}
+        </td>
         <td><a href="#" type="button" class="btn btn-sm btn-outline-secondary">Supprimer</a></td>
     </tr>
 
