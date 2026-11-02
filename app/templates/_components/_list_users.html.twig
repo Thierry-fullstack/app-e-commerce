@@ -1,0 +1,14 @@
+        <tr class="table-default">
+            <th scope="row">
+                {{ user.id }}
+            </th>
+            <td class="d-none d-sm-table-cell">{{ user.email }}</td>
+            <td>{{ user.roles[0] }}</td>
+            <td>{{ user.createdAt | date('d-m-Y') }}</a></td>
+            <td>{{ user.customer.firstname | capitalize }}</td>
+            <td>{{ user.customer.lastname | capitalize }}</td>
+            <td><a href="#" type="button" class="btn btn-sm btn-outline-warning">Voir</a></td>
+        </tr>
+
+
+

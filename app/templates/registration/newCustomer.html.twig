@@ -21,6 +21,9 @@
                             <small id="infoFirstName" class="mt-0">Prénom</small>
                         </li>
                         <li class="contact-item  d-flex justify-content-between lh-sm">
+                            <small id="infoPhone" class="mt-0">Téléphone</small>
+                        </li>
+                        <li class="contact-item  d-flex justify-content-between lh-sm">
                             <small id="infoAddress" class="mt-0">Adresse</small>
                         </li>
                         <li class="contact-item  d-flex justify-content-between lh-sm">
@@ -49,13 +52,20 @@
                         </div>
                     </div>
                     <div class="form-floating mb-3">
+                        {{ form_widget(form.phone) }}
+                        {{ form_label(form.phone)}}
+                        <div class="text-danger small">
+                            {{ form_errors(form.phone)}}
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
                         {{ form_widget(form.address) }}
                         {{ form_label(form.address)}}
                         <div class="text-danger small">
                             {{ form_errors(form.address)}}
                         </div>
                     </div>
-                    <div class="row col-md-12 gy-3">
+                    <div class="row">
                        <div class="form-floating col-md-4">
                            {{ form_widget(form.zipcode) }}
                            {{ form_label(form.zipcode)}}

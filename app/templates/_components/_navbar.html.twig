@@ -9,7 +9,7 @@
                 <li class="nav-item"><a class="nav-link" href="#!">A propos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
             </ul>
-            {% if app.user %}
+            {% if app.user and app.user.step == 'C' and app.user.resetNumber == null   %}
                 {% if is_granted('ROLE_ADMIN') %}
                     <ul class="navbar-nav ms-auto mx-5 mb-2 mb-lg-0 text-small text-white">
                         <li class="nav-item"><a class="nav-link text-primary-emphasis fw-bolder" href="{{ path('app_main') }}">Accueil</a></li>

@@ -5,12 +5,14 @@ namespace App\Form;
 use App\Entity\Customer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\Sequentially;
+
 
 class CustomerType extends AbstractType
 {
@@ -62,6 +64,20 @@ class CustomerType extends AbstractType
                             'message'=>'Le prénom ne peut contenir que des lettres, des espaces, des apostrophes et des tirets'
                     ])
             ])],
+            ])
+            ->add('phone',TelType::class,['attr'=>['class'=>'form-control form-control-sm','placeholder'=>'0675848699'],
+                    'label'=>'Téléphone',
+                    'label_attr'=>['class'=>'form-label mt-2','id'=>'phone'],
+                    'constraints'=>[
+                        new Sequentially([
+                            new NotBlank(message: '!'),
+                            new Regex([
+                                'pattern'=>'/^[0-9]{10}+$/',
+                                'htmlPattern'=>'[0-9]{10}+',
+                                'message'=>'Uniquement 10 chiffres SVP. '
+                            ])
+                        ])
+                    ]
             ])
             ->add('address',TextType::class,[
                 'label'=>'Adresse',

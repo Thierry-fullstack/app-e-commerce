@@ -7,6 +7,7 @@ import {controlAddress} from "./functions/address/address.js";
 import {controlZipcode} from "./functions/zipcode/zipcode.js";
 import {controlCity} from "./functions/city/city.js";
 import {controlFieldsRegistration} from "./functions/controlFields/controlFields.js";
+import {controlPhone} from "./functions/phone/phone.js";
 
 
 
@@ -24,6 +25,7 @@ window.onload = () => {
         /* fields error */
         const customer_lastname_error1 = document.querySelector('#customer_lastname_error1');
         const customer_firstname_error1 = document.querySelector('#customer_firstname_error1');
+        const customer_phone_error1 = document.querySelector('#customer_firstname_error1');
         const customer_address_error1 = document.querySelector('#customer_address_error1');
         const customer_zipcode_error1 = document.querySelector('#customer_zipcode_error1');
         const customer_city_error1= document.querySelector('#customer_city_error1');
@@ -76,45 +78,59 @@ window.onload = () => {
             controlFieldsRegistration(inputEffect,dialogInscription,customer_submit);
         });
         inputEffect[2].addEventListener('focus',function(){
-            message ='Saisir adresse';
+            message ='Saisir téléphone';
             showMessage(dialogInscription, message);
         });
         inputEffect[2].addEventListener('input',function(){
-            controlAddress(this)? successFieldRegister(this,infoAll[2],labelEffect[2],customer_address_error1) :
-                alertFieldRegister(this,infoAll[2],labelEffect[2],customer_address_error1);
+            controlPhone(this)? successFieldRegister(this,infoAll[2],labelEffect[2],customer_phone_error1):
+                alertFieldRegister(this,infoAll[2],labelEffect[2],customer_phone_error1);
             controlFieldsRegistration(inputEffect,dialogInscription,customer_submit);
         });
         inputEffect[2].addEventListener('blur',function(){
-            controlAddress(this)? successFieldRegister(this,infoAll[2],labelEffect[2],customer_address_error1) :
-                alertFieldRegister(this,infoAll[2],labelEffect[2],customer_address_error1);
+            controlPhone(this)? successFieldRegister(this,infoAll[2],labelEffect[2],customer_phone_error1):
+                alertFieldRegister(this,infoAll[2],labelEffect[2],customer_phone_error1);
             controlFieldsRegistration(inputEffect,dialogInscription,customer_submit);
         });
         inputEffect[3].addEventListener('focus',function(){
-            message ='Saisir code postal';
+            message ='Saisir adresse';
             showMessage(dialogInscription, message);
         });
         inputEffect[3].addEventListener('input',function(){
-            controlZipcode(this)? successFieldRegister(this,infoAll[3],labelEffect[3],customer_zipcode_error1) :
-                alertFieldRegister(this,infoAll[3],labelEffect[3],customer_zipcode_error1);
+            controlAddress(this)? successFieldRegister(this,infoAll[3],labelEffect[3],customer_address_error1) :
+                alertFieldRegister(this,infoAll[3],labelEffect[3],customer_address_error1);
             controlFieldsRegistration(inputEffect,dialogInscription,customer_submit);
         });
         inputEffect[3].addEventListener('blur',function(){
-            controlZipcode(this)? successFieldRegister(this,infoAll[3],labelEffect[3],customer_zipcode_error1) :
-                alertFieldRegister(this,infoAll[3],labelEffect[3],customer_zipcode_error1);
+            controlAddress(this)? successFieldRegister(this,infoAll[3],labelEffect[3],customer_address_error1) :
+                alertFieldRegister(this,infoAll[3],labelEffect[3],customer_address_error1);
             controlFieldsRegistration(inputEffect,dialogInscription,customer_submit);
         });
         inputEffect[4].addEventListener('focus',function(){
-            message ='Saisir ville';
+            message ='Saisir code postal';
             showMessage(dialogInscription, message);
         });
         inputEffect[4].addEventListener('input',function(){
-            controlCity(this)? successFieldRegister(this,infoAll[4],labelEffect[4],customer_city_error1) :
-                alertFieldRegister(this,infoAll[4],labelEffect[4],customer_city_error1);
+            controlZipcode(this)? successFieldRegister(this,infoAll[4],labelEffect[4],customer_zipcode_error1) :
+                alertFieldRegister(this,infoAll[4],labelEffect[4],customer_zipcode_error1);
             controlFieldsRegistration(inputEffect,dialogInscription,customer_submit);
         });
         inputEffect[4].addEventListener('blur',function(){
-            controlCity(this)? successFieldRegister(this,infoAll[4],labelEffect[4],customer_city_error1) :
-                alertFieldRegister(this,infoAll[4],labelEffect[4],customer_city_error1);
+            controlZipcode(this)? successFieldRegister(this,infoAll[4],labelEffect[4],customer_zipcode_error1) :
+                alertFieldRegister(this,infoAll[4],labelEffect[4],customer_zipcode_error1);
+            controlFieldsRegistration(inputEffect,dialogInscription,customer_submit);
+        });
+        inputEffect[5].addEventListener('focus',function(){
+            message ='Saisir ville';
+            showMessage(dialogInscription, message);
+        });
+        inputEffect[5].addEventListener('input',function(){
+            controlCity(this)? successFieldRegister(this,infoAll[5],labelEffect[5],customer_city_error1) :
+                alertFieldRegister(this,infoAll[5],labelEffect[5],customer_city_error1);
+            controlFieldsRegistration(inputEffect,dialogInscription,customer_submit);
+        });
+        inputEffect[5].addEventListener('blur',function(){
+            controlCity(this)? successFieldRegister(this,infoAll[5],labelEffect[5],customer_city_error1) :
+                alertFieldRegister(this,infoAll[5],labelEffect[5],customer_city_error1);
             controlFieldsRegistration(inputEffect,dialogInscription,customer_submit);
         });
 

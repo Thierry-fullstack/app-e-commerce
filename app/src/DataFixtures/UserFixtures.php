@@ -30,7 +30,7 @@ class UserFixtures extends Fixture
          $manager->persist($customer);
         $manager->flush();
 
-        for($i = 0; $i < 5; $i++){
+        for($i = 0; $i < 30; $i++){
             $user = new User();
             $user->setEmail($faker->email())->setRoles(['ROLE_USER'])->setCreatedAt(new DateTimeImmutable())->setStep('C');
             $user->setPassword($this->passwordHasher->hashPassword($user,'ArethiA75!'));

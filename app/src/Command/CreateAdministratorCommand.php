@@ -10,7 +10,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class CreateAdministratorCommand extends Command
@@ -23,7 +22,7 @@ class CreateAdministratorCommand extends Command
 
     protected function configure(): void
     {
-        $this->setDescription('Creates an administrator user.');
+        $this->setDescription('Create an administrator user.');
         $this->addArgument('email', InputArgument::REQUIRED, 'The email of the administrator.')
         ->addArgument('password', InputArgument::REQUIRED, 'The password of the administrator.');
     }

@@ -11,9 +11,10 @@ use Twig\Environment;
 
 class DropdownTypeSubscriber implements EventSubscriberInterface
 {
-    const array ROUTES = ['app_main'];
+    const  ROUTES = ['app_main'];
 
-    public function __construct(private readonly TypeRepository $typeRepository ,private readonly Environment $twig)
+    public function __construct(private readonly TypeRepository $typeRepository ,private readonly Environment $twig,
+    )
     {
     }
 
@@ -21,10 +22,8 @@ class DropdownTypeSubscriber implements EventSubscriberInterface
     {
         $route = $event->getRequest()->get('_route');
         if(in_array($route,DropdownTypeSubscriber::ROUTES)){
-          //  $types = $this->typeRepository->findBy([],['name'=>'asc']);
-            $types = $this->typeRepository->findBy([],['name'=>'ASC']);
-
-            $this->twig->addGlobal('allTypes',$types);
+            $datas = $this->typeRepository->findBy([],['slug'=>'ASC']);
+            $this->twig->addGlobal('allTypes',$datas);
         }
     }
 
