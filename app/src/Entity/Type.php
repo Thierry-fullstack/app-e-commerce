@@ -10,9 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: TypeRepository::class)]
 class Type
 {
-
     public const TYPE_ADD_SUCCESSFULLY = 'TYPE_ADD_SUCCESSFULLY';
     public const TYPE_BAD_RESPONSE = 'TYPE_BAD_RESPONSE';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -35,6 +35,12 @@ class Type
 
     #[ORM\Column]
     private bool $isParent = false;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $child = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $url = null;
 
     public function __construct()
     {
@@ -124,8 +130,34 @@ class Type
         return $this;
     }
 
+    public function getChild(): ?string
+    {
+        return $this->child;
+    }
+
+    public function setChild(?string $child): static
+    {
+        $this->child = $child;
+
+        return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(string $url): static
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
     public function __toString(): string
     {
         return $this->name;
     }
+
+
 }

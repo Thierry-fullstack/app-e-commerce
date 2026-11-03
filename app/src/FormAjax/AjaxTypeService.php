@@ -49,10 +49,16 @@ public function __construct(
         /** @var UploadedFile $name */
         $name = $form->get('name')->getData();
         $type->setAlt(str_replace('.'.$name->getClientOriginalExtension(),'',$name->getClientOriginalName()));
+        $type->setName(str_replace('.'.$name->getClientOriginalExtension(),'',$name->getClientOriginalName()));
         $type->setSlug($this->slugger->slug(str_replace('.'.$name->getClientOriginalExtension(),'',$name->getClientOriginalName()))->lower());
+        $type->setChild($form->get('child')->getData());
+        if($type->isParent() === true ){
+            $type->setChild(null);
+        }
+
         if($name->getClientOriginalExtension()==='jpeg' || $name->getClientOriginalExtension() ==='jpg'){
             $fichier = $this->photoService->add($name,uniqid(more_entropy: true). '-' . $type->getSlug(),self::FILE_TYPES,300,300);
-            $type->setName($fichier);
+            $type->setUrl($fichier);
         }
         try{
             $this->em->persist($type);

@@ -4,8 +4,8 @@
                      class="img-thumbnail float-start list_photos_mark" alt="{{ mark.slug }}" />
             </th>
             <td class="d-none d-sm-table-cell">{{ mark.id }}</td>
-            <td>{{ mark.slug }}</td>
-            <td><a href="#" type="button" class="btn btn-sm btn-outline-secondary">Supprimer</a></td>
+            <td>{{ mark.slug | capitalize }}</td>
+            <td><a href="#" type="button" class="btn btn-sm btn-outline-warning">Supprimer</a></td>
         </tr>
 
 

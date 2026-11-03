@@ -4,7 +4,10 @@ namespace App\Form;
 
 
 use App\Entity\Type;
+use App\Repository\TypeRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -34,6 +37,20 @@ class TypeFormType extends AbstractType
             ])
             ->add('isParent',CheckboxType::class,['attr'=>['class'=>'form-check-input'],
                 'label'=>'Type principal'])
+            ->add('child',EntityType::class,['attr'=>['class'=>'form-select text-primary'],'label'=>'Associé à :',
+                'label_attr'=>['class'=>'form-label text-primary'],
+                'class'=>Type::class,
+                'multiple'=>false,
+                'expanded'=>false,
+                'placeholder'=>'Choisir',
+                'choice_label'=>'slug',
+                'query_builder'=> function(TypeRepository $er){
+                return $er->createQueryBuilder('t')
+                    ->where('t.isParent = :active')
+                    ->setParameter('active',true)
+                    ->orderBy('t.isParent','DESC');
+                },
+                ])
             ->add('submit',SubmitType::class,['attr'=>['class'=>'btn btn-sm btn-primary w-100 '],
                 'label'=>'Soumettre'])
         ;
