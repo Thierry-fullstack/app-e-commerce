@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégorie : {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 my-5">
+                <h2 class="text-info-emphasis text-center text-capitalize mt-5">Produits disponibles - Section  {{ categories[0].type.name}}  </h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ path('app_admin_index') }}"><span class="badge bg-primary">Accueil</span></a></li>
+                        <li class="breadcrumb-item"><a href="{{  path('app_main_list_types',{ name:categories[0].type.child }) }}">{{ categories[0].type.child }}</a></li>
+                        <li class="breadcrumb-item"><a>{{ categories[0].type.name }}</a></li>
+                    </ol>
+                </nav>
+            </div>
+            {% for category in categories %}
+                    <div class="col-lg-3 px-5">
+                        {% include '_components/_card_sub_category.html.twig' with { category:category} %}
+                    </div>
+            {%  endfor %}
+        </div>
+
+    </div>
+{% endblock %}

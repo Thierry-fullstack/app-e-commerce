@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 
+use App\Entity\Type;
 use App\Entity\User;
+use App\Repository\CategoryRepository;
+use App\Repository\TypeRepository;
 use App\Service\IntraController;
 use App\Service\JwtService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -44,5 +47,20 @@ final class MainController extends AbstractController
             }
         }
         return $this->render('main/index.html.twig');
+    }
+
+    #[Route('/type/list/{name}',name:'app_main_list_types',methods:['GET'])]
+    public  function listByType(Type $type, TypeRepository $typeRepository):Response
+    {
+        $types = $typeRepository->findTypesByType($type->getName());
+        return $this->render('main/list_by_type.html.twig',['types'=>$types]);
+    }
+
+    #[Route('/product/list/{id}',name:'app_main_list_categories',methods:['GET'])]
+    public  function listByProduct(Type $type, CategoryRepository $categoryRepository):Response
+    {
+        $categories = $categoryRepository->findCategoriesByType($type->getId());
+
+        return $this->render('main/list_categories_by_type.html.twig',['categories'=>$categories]);
     }
 }

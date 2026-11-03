@@ -1,0 +1,10 @@
+
+{% if type is defined %}
+    <section class="my-2" style="width: 18rem;">
+        <h6 class="card-title text-primary fw-semibold mb-2">{{ type.name }}</h6>
+        <img src="{{ asset('assets/uploads/type/') ~ type.url }}" alt="{{ type.slug }}" class="img-fluid pe-4 h-50 w-50" alt="{{ type.alt }}">
+        <div class="my-2">
+            <a href="{{ path('app_main_list_categories',{id:type.id}) }}" class="btn btn-sm btn-outline-primary">Voir les produits</a>
+        </div>
+    </section>
+{% endif %}

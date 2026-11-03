@@ -22,7 +22,7 @@ class DropdownTypeSubscriber implements EventSubscriberInterface
     {
         $route = $event->getRequest()->get('_route');
         if(in_array($route,DropdownTypeSubscriber::ROUTES)){
-            $datas = $this->typeRepository->findBy([],['slug'=>'ASC']);
+            $datas = $this->typeRepository->findBy([],['name'=>'ASC']);
             $this->twig->addGlobal('allTypes',$datas);
         }
     }
