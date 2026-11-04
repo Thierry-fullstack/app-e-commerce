@@ -16,7 +16,7 @@ class Product
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 50)]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
@@ -40,7 +40,7 @@ class Product
     /**
      * @var Collection<int, Image>
      */
-    #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'product', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'product', cascade: ['persist','remove'], orphanRemoval: true)]
     private Collection $images;
 
     #[ORM\ManyToOne(inversedBy: 'products')]

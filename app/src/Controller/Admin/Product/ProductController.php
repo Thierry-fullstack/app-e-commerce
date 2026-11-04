@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 #[Route('/admin/produit', name: 'app_admin_product_')]
 final class ProductController extends AbstractController
 {
-    public const string DIR_PRODUCTS = 'product';
+    public const DIR_PRODUCTS = 'product';
 
     /**
      * @param ProductRepository $productRepository
