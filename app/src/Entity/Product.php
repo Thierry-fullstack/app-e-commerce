@@ -11,6 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
+
+    public const PRODUCT_ADD_SUCCESSFULLY = 'PRODUCT_ADD_SUCCESSFULLY';
+    public const PRODUCT_BAD_RESPONSE = 'PRODUCT_BAD_RESPONSE';
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -22,7 +25,7 @@ class Product
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
-    #[ORM\Column]
+    #[ORM\Column()]
     private ?int $price = null;
 
     #[ORM\Column]
@@ -35,7 +38,7 @@ class Product
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    private ?bool $isPublished = null;
+    private bool $isPublished = false;
 
     /**
      * @var Collection<int, Image>

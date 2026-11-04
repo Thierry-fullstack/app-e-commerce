@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Ajout - Article{% endblock %}
-
+    {% block importmap %}
+        {{ importmap(['app','ajax-product']) }}
+    {% endblock %}
 {% block body %}
     {% if exception is defined %}
     {{ exception }}
@@ -20,12 +22,28 @@
         <div class="row">
             <section class="col-md-10 col-sm-12 mx-auto">
                 {{ form_start(form,{attr:{id:'form_add_product',novalidate:'novalidate'}}) }}
-                <div class="form-floating mb-3">
+                <div class="form-floating mb-4">
                     {{ form_widget(form.name) }}
                     {{ form_label(form.name) }}
                     <div class="text-danger small">
                         {{ form_errors(form.name) }}
                     </div>
+                </div>
+                <div class="row mb-1">
+                <div class="col-6 form-floating">
+                    {{ form_widget(form.mark) }}
+                    {{ form_label(form.mark) }}
+                    <div class="text-danger small">
+                        {{ form_errors(form.mark) }}
+                    </div>
+                </div>
+                <div class="col-6 form-floating">
+                        {{ form_widget(form.category) }}
+                        {{ form_label(form.category) }}
+                        <div class="text-danger small">
+                            {{ form_errors(form.category) }}
+                        </div>
+                </div>
                 </div>
                 <div class="form-floating mb-3">
                     {{ form_widget(form.description) }}
@@ -50,13 +68,7 @@
                             </div>
                         </div>
                 </div>
-                <div class="form-floating mb-3">
-                    {{ form_widget(form.category) }}
-                    {{ form_label(form.category) }}
-                    <div class="text-danger small">
-                        {{ form_errors(form.category) }}
-                    </div>
-                </div>
+
                 <div class="form-floating mb-3">
                     {{ form_widget(form.images) }}
                     {{ form_label(form.images) }}

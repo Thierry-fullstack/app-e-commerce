@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Entity\Mark;
 use App\Entity\Product;
 use DateTimeImmutable;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -42,9 +43,18 @@ class AddProductType extends AbstractType
                         new Regex([
                             'pattern'=>'/^[0-9a-zA-ZÀ-ÿ\s\'-]+$/',
                             'htmlPattern'=>'[0-9a-zA-ZÀ-ÿ\s\'-]+',
-                            'message'=>'Uniquement Chiffres,lettres, des espaces, des apostrophes et des tirets'
                         ])
                     ])
+                ]
+            ])
+            ->add('mark', EntityType::class,['attr'=>['class'=>'form-select form-select-sm mb-4'],
+                'label_attr'=>['class'=>'text-primary'],
+                'class' => Mark::class,
+                'choice_label' => 'alt',
+                'label'=>'Marque',
+                'placeholder'=>'Choisir ',
+                'constraints'=>[
+                    new NotBlank()
                 ]
             ])
             ->add('description',TextareaType::class,
@@ -53,12 +63,6 @@ class AddProductType extends AbstractType
                     'constraints'=>[
                         new Sequentially([
                             new NotBlank(),
-                            new Length(max: 255),
-                            new Regex([
-                                'pattern'=>'/^[0-9a-zA-ZÀ-ÿ\s\'-]+$/',
-                                'htmlPattern'=>'[0-9a-zA-ZÀ-ÿ\s\'-]+',
-                                'message'=>'Uniquement Chiffres,lettres, des espaces, des apostrophes et des tirets'
-                            ])
                         ])
                     ]])
             ->add('price',NumberType::class,['attr'=>['class'=>'form-control form-control-sm'],
@@ -97,9 +101,9 @@ class AddProductType extends AbstractType
                 'required'=>true,
                 'constraints'=>[
                     new Sequentially([
-                        new NotBlank(message: '3 photos'),
+                        new NotBlank(),
                         new Count(
-                            min: 3, max: 3, minMessage: '3 photos', maxMessage: '3 photos',
+                            min: 3, max: 3,
                         ),
                     ]),
                     new All([

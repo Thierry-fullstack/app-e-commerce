@@ -52,6 +52,10 @@ return [
         'path'=>'./assets/js/ajaxCategory/ajaxCategory.js',
         'entrypoint'=>true,
     ],
+    'ajax-product'=>[
+        'path'=>'./assets/js/ajaxProduct/ajaxProduct.js',
+        'entrypoint'=>true,
+    ],
     '@hotwired/turbo' => [
         'version' => '8.0.23',
     ],
